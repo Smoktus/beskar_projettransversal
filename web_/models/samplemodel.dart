@@ -1,4 +1,4 @@
-// import "../db/connection.dart";
+//import "../db/connection.dart";
 import 'package:postgres/postgres.dart';
 
 class SampleModel {
@@ -10,7 +10,7 @@ class SampleModel {
     this.table = "personnes";
   }
 
-  insert({String name}) async {
+  insert(String param, {String name}) async {
     List<List<dynamic>> results = await this.conn.query(
         "INSERT INTO ${this.table} (name) VALUES (@name)",
         substitutionValues: {"name": name});

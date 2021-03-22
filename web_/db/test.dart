@@ -7,7 +7,7 @@ void main() async {
   var db = DB();
   await db.conn.open();
   var samplemodel = SampleModel(db.conn);
-
+  var r = await samplemodel.insert("Anatole");
   var results = await samplemodel.update(2, name: "Steve");
   print(results);
   db.conn.close();

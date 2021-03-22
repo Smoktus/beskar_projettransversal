@@ -1,4 +1,6 @@
-// import 'dart:async' show Future;
+import 'dart:async' show Future;
+import 'dart:indexed_db';
+
 import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf/shelf.dart';
 import '../cors.dart';
@@ -7,19 +9,18 @@ import 'dart:convert';
 // import 'package:shelf/shelf_io.dart' as shelf_io;
 
 class TestController {
-
   // By exposing a [Router] for an object, it can be mounted in other routers.
   Router get router {
     final router = Router();
 
     // get request to "/test"
-    router.get('/', (Request req){
+    router.get('/', (Request req) {
       return Response.ok("The Test Controller", headers: cors);
-
     });
 
     // get request to "/getall" use as model on how to work with models and json responses
     router.get('/getall', (Request req) async {
+      //print("entering get all");
       var Test = await model();
       var results = await Test.getAll();
       print(results);
@@ -27,11 +28,15 @@ class TestController {
     });
 
     // get request to "/test/<param>?query=????"
-    router.get('/<param>', (Request req, String param){
-      print(req.url.queryParameters["query"]);// acessing a url query
+    router.get('/<param>', (Request req, String param) {
+      print(req.url.queryParameters["query"]); // acessing a url query
       return Response.ok(param, headers: cors);
     });
-
+    router.post('/personne/<param>', (Request req, String param) async {
+      var Test = await model();
+      var results = await Test.insert(param);
+      return Response.ok(param, headers: cors);
+    });
     // catch all for "/test"
     router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));
 

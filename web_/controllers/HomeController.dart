@@ -6,7 +6,6 @@ import './TestController.dart';
 import '../cors.dart';
 
 class HomeController {
-
   // Define our getter for our handler
   Handler get handler {
     final router = Router();
