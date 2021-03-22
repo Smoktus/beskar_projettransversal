@@ -32,11 +32,11 @@ class TestController {
       print(req.url.queryParameters["query"]); // acessing a url query
       return Response.ok(param, headers: cors);
     });
-    router.post('/personne/<param>', (Request req, String param) async {
+    /*router.post('/personne/<param>', (Request req, String param) async {
       var Test = await model();
       var results = await Test.insert(param);
       return Response.ok(param, headers: cors);
-    });
+    });*/
     // catch all for "/test"
     router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));
 
