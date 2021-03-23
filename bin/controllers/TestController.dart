@@ -30,12 +30,17 @@ class TestController {
     // get request to "/test/<param>?query=????"
     router.get('/<param>', (Request req, String param) {
       print(req.url.queryParameters["query"]); // acessing a url query
+      print(req.method);
+      print("param " + param);
       return Response.ok(param, headers: cors);
     });
-    /*router.post('/personne/<param>', (Request req, String param) async {
+
+    /*router.post('/personne/<id>', (Request req, String id) async {
       var Test = await model();
-      var results = await Test.insert(param);
-      return Response.ok(param, headers: cors);
+      print(req);
+      print(id);
+      //var results = await Test.insert();
+      return Response.ok(id, headers: cors);
     });*/
     // catch all for "/test"
     router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));
