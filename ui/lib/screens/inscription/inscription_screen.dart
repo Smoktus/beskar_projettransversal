@@ -4,6 +4,7 @@ import 'components/body.dart';
 
 class InscriptionScreen extends StatelessWidget {
   static String routeName = "//inscription";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

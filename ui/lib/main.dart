@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ui/screens/acceuil/acceuil_screen.dart';
 import 'package:ui/routes.dart';
+import 'package:ui/screens/inscription/components/inscription_form.dart';
 import './theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => DropDownListProvider(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
