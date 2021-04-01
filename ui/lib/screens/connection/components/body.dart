@@ -1,7 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ui/screens/connection/components/connection_form.dart';
 
 class Body extends StatelessWidget {
+  bool isRemembered = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +22,7 @@ class Body extends StatelessWidget {
                   labelText: 'Username',
                 ),
                 validator: (String value) {
-                  return (value != null && !value.contains('@'))
+                  return (value.isEmpty || !value.contains('@'))
                       ? 'Your email must contains @ '
                       : null;
                 },
@@ -29,16 +34,21 @@ class Body extends StatelessWidget {
                   labelText: 'Password',
                 ),
                 validator: (String value) {
-                  return (value != null && value.length >= 8)
-                      ? 'Your password must be 8 character long '
+                  return (value.isEmpty || value.length < 8)
+                      ? 'Your password must be 8 character long'
                       : null;
                 },
               ),
+              Consumer<ConnectionFormProvider>(builder: (_, provider, __) {
+                isRemembered = provider.newValue;
+                return ConnectionForm();
+              }),
               ElevatedButton(
                   onPressed: () {
-                    print('pressed');
+                    print('pressed $isRemembered');
+                    //how to get data from checkbox
                   },
-                  child: Text('Submit'))
+                  child: Text('Submit')),
             ],
           ),
         ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DropDownListProvider with ChangeNotifier {
-  List<String> _items = ['Employé', 'Employeur', 'Commercant'];
+  List<String> _items = ['Employé', 'Employeur', 'Commerçant'];
 
   String _selectedItem;
 
@@ -26,10 +26,9 @@ class _InscriptionFormState extends State<InscriptionForm> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     var mediaQueryData = MediaQuery.of(context);
-    //final myController = TextEditingController();
-    //String dropdownValue = 'Employeur';
     final width = mediaQueryData.size.width;
     final Map<String, String> mapForm = new Map<String, String>();
+    String role = '';
     return Form(
       key: _formKey,
       child: Column(
@@ -45,8 +44,8 @@ class _InscriptionFormState extends State<InscriptionForm> {
                     value: provider.selected,
                     onChanged: (String newValue) {
                       provider.setSelectedItem(newValue);
-                      //print(newValue);
-                      mapForm["role"] = newValue;
+                      //mapForm["role"] = newValue;
+                      role = newValue;
                     },
                     items: provider.items
                         .map<DropdownMenuItem<String>>((String value) {
@@ -229,6 +228,14 @@ class _InscriptionFormState extends State<InscriptionForm> {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
                   print(mapForm);
+                  if (role == 'Employé') {
+                    //Navigator.pushNamed(context, "/AcceuilEmploye")
+                    //aller à la page acceuil de l'employé
+                    //création d'un employé en local
+                    //création d'un employé avec l'api
+                    //
+                  } else if (role == 'Employeur') {
+                  } else if (role == 'Commerçant') {}
                   //Navigator.pushNamed(context,"") // Mettre le bon écran d'acceuil
                 }
               },

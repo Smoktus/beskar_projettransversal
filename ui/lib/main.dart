@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/screens/acceuil/acceuil_screen.dart';
 import 'package:ui/routes.dart';
+import 'package:ui/screens/connection/components/connection_form.dart';
 import 'package:ui/screens/inscription/components/inscription_form.dart';
 import './theme.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => DropDownListProvider(),
-    child: MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DropDownListProvider()),
+        ChangeNotifierProvider(create: (_) => ConnectionFormProvider())
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
