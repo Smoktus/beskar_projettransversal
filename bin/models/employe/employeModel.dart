@@ -5,16 +5,24 @@ import 'package:meta/meta.dart';
 class EmployeModel {
   PostgreSQLConnection conn;
   String table;
-  final int id_employe;
-  final String nom, prenom;
-  final String mail, password;
-  final String ville, codePostal;
-  final String adresse, nSiret;
-  final int id_entreprise;
 
-  EmployeModel(conn,
+  int id_employe;
+  String nom, prenom;
+  String mail, password;
+  String ville, codePostal;
+  String adresse, nSiret;
+  double solde;
+  int id_entreprise;
+
+  EmployeModel(conn) {
+    this.conn = conn;
+    this.table = "employe";
+  }
+
+  EmployeModel.fromEmployeModel(conn,
       {this.table = "employe",
       @required this.id_employe,
+      this.solde,
       @required this.nom,
       @required this.prenom,
       @required this.mail,
@@ -25,7 +33,7 @@ class EmployeModel {
       this.nSiret,
       @required this.id_entreprise});
 
-  EmployeModel.fromEmployeModel(
+  /*EmployeModel.fromEmployeModel(
       {this.table = "employe",
       this.id_employe,
       @required this.nom,
@@ -36,11 +44,12 @@ class EmployeModel {
       this.codePostal,
       this.ville,
       this.nSiret,
-      this.id_entreprise});
+      this.id_entreprise});*/
 
   Map<String, dynamic> toMap() {
     return {
       'id_employe': this.id_employe,
+      'solde': this.solde,
       'nom': this.nom,
       'prenom': this.prenom,
       'mail': this.mail,
@@ -52,19 +61,14 @@ class EmployeModel {
     };
   }
 
+//insert into employe (solde, nom, prenom, mail, password, adresse, "codePostal" , ville, "nSiret") values (18, '{Truffaut}' , '{Anatole}', '{ana.tr@beskar.com}', '{truec}', '{23 truc muc}', '{69003}', '{Lyon}', '{1212121}');
   // POST/v1/employes
-  insert(String sql, params) async {
+  //param is a map of the information
+  insert(params) async {
     String sql =
-        "insert into ${this.table} (name, prenom, mail, password, adresse, codePostal, ville, nSiret) values (@nom, @prenom, @mail, @password, @adresse, @codePostal, @ville, @nSiret)";
+        "insert into ${this.table} (nom, prenom, mail, password, adresse, codePostal, ville, nSiret) values (@nom, @prenom, @mail, @password, @adresse, @codePostal, @ville, @nSiret)";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
-    //params has to be a map of the model
-    /* {"nom" : nom,
-        "prenom" : prenom",
-        ect... }*/
-    /*List<List<dynamic>> results = await this.conn.query(
-        "INSERT INTO ${this.table} (nom) VALUES (@name)",
-        substitutionValues: {"name": name});*/
     //return await this.getAll();
   }
 
@@ -77,14 +81,15 @@ class EmployeModel {
     for (final row in results) {
       list.add({
         'id_employe': row[0],
-        'nom': row[1],
-        'prenom': row[2],
-        'mail': row[3],
-        'password': row[4],
-        'adresse': row[5],
-        'codePostal': row[6],
-        'ville': row[7],
-        'nSiret': row[8]
+        'solde': row[1],
+        'nom': row[2],
+        'prenom': row[3],
+        'mail': row[4],
+        'password': row[5],
+        'adresse': row[6],
+        'codePostal': row[7],
+        'ville': row[8],
+        'nSiret': row[9]
       });
     }
     ;
@@ -94,29 +99,47 @@ class EmployeModel {
 
   getOne(int id) async {
     List<List<dynamic>> results = await this.conn.query(
-        "SELECT * FROM ${this.table} WHERE id=@id",
-        substitutionValues: {"id": id});
+        "SELECT * FROM ${this.table} WHERE id_employe=@id_employe",
+        substitutionValues: {"id_employe": id});
 
     List<Map<String, dynamic>> list = [];
 
     for (final row in results) {
-      list.add({"id": row[0], "name": row[1]});
+      list.add({
+        'id_employe': row[0],
+        'solde': row[1],
+        'nom': row[2],
+        'prenom': row[3],
+        'mail': row[4],
+        'password': row[5],
+        'adresse': row[6],
+        'codePostal': row[7],
+        'ville': row[8],
+        'nSiret': row[9]
+      });
     }
 
     return list[0];
   }
 
+  getSolde(int id) async {
+    List<List<dynamic>> results = await this.conn.query(
+        "SELECT ${this.solde} FROM ${this.table} WHERE id_employe=@id_employe",
+        substitutionValues: {"id_employe": id});
+    return this.solde;
+  }
+
   update(int id, {String name}) async {
     List<List<dynamic>> results = await this.conn.query(
-        "UPDATE ${this.table} SET name=@name WHERE id=@id",
-        substitutionValues: {"id": id, "name": name});
+        "UPDATE ${this.table} SET nom=@nom WHERE id_employe=@id_employe",
+        substitutionValues: {"id_employe": id, "nom": name});
     return await this.getAll();
   }
 
   destroy(int id) async {
     List<List<dynamic>> results = await this.conn.query(
-        "DELETE FROM ${this.table} WHERE id=@id",
-        substitutionValues: {"id": id});
+        "DELETE FROM ${this.table} WHERE id_employe=@id_employe",
+        substitutionValues: {"id_employe": id});
     return await this.getAll();
   }
 }

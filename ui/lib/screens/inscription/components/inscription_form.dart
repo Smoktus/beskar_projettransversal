@@ -229,6 +229,9 @@ class _InscriptionFormState extends State<InscriptionForm> {
                   _formKey.currentState.save();
                   print(mapForm);
                   if (role == 'Employé') {
+                    //envoi de POST avec les infos de employé
+                    //POST/v1/employeurs post(/v1/employeurs, contenu de la request)
+                    //appel de la bonne branche du routeur
                     //Navigator.pushNamed(context, "/AcceuilEmploye")
                     //aller à la page acceuil de l'employé
                     //création d'un employé en local
