@@ -9,8 +9,8 @@ class EmployeModel {
   int id_employe;
   String nom, prenom;
   String mail, password;
-  String ville, codePostal;
-  String adresse, nSiret;
+  String ville, codepostal;
+  String adresse, nsiret;
   double solde;
   int id_entreprise;
 
@@ -19,34 +19,25 @@ class EmployeModel {
     this.table = "employe";
   }
 
+  //on utilise ce constructeur si on doit creer un objet de Employe dans
+  //le fonctionnement de l'appli
   EmployeModel.fromEmployeModel(conn,
-      {this.table = "employe",
-      @required this.id_employe,
+      {@required this.id_employe,
       this.solde,
       @required this.nom,
       @required this.prenom,
       @required this.mail,
       @required this.password,
       this.adresse,
-      this.codePostal,
+      this.codepostal,
       this.ville,
-      this.nSiret,
-      @required this.id_entreprise});
+      this.nsiret,
+      @required this.id_entreprise}) {
+    this.conn = conn;
+    this.table = "employe";
+  }
 
-  /*EmployeModel.fromEmployeModel(
-      {this.table = "employe",
-      this.id_employe,
-      @required this.nom,
-      @required this.prenom,
-      @required this.mail,
-      @required this.password,
-      this.adresse,
-      this.codePostal,
-      this.ville,
-      this.nSiret,
-      this.id_entreprise});*/
-
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id_employe': this.id_employe,
       'solde': this.solde,
@@ -55,18 +46,18 @@ class EmployeModel {
       'mail': this.mail,
       'password': this.password,
       'adresse': this.adresse,
-      'codePostal': this.codePostal,
+      'codepostal': this.codepostal,
       'ville': this.ville,
-      'nSiret': this.nSiret
+      'nsiret': this.nsiret
     };
   }
 
 //insert into employe (solde, nom, prenom, mail, password, adresse, "codePostal" , ville, "nSiret") values (18, '{Truffaut}' , '{Anatole}', '{ana.tr@beskar.com}', '{truec}', '{23 truc muc}', '{69003}', '{Lyon}', '{1212121}');
   // POST/v1/employes
-  //param is a map of the information
+  //insert a new one !
   insert(params) async {
     String sql =
-        "insert into ${this.table} (nom, prenom, mail, password, adresse, codePostal, ville, nSiret) values (@nom, @prenom, @mail, @password, @adresse, @codePostal, @ville, @nSiret)";
+        "insert into ${this.table} (nom, prenom, mail, password, adresse, codepostal, ville, nsiret) values (@nom, @prenom, @mail, @password, @adresse, @codepostal, @ville, @nsiret)";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
     //return await this.getAll();
@@ -80,16 +71,16 @@ class EmployeModel {
 
     for (final row in results) {
       list.add({
-        'id_employe': row[0],
-        'solde': row[1],
-        'nom': row[2],
-        'prenom': row[3],
-        'mail': row[4],
-        'password': row[5],
-        'adresse': row[6],
-        'codePostal': row[7],
-        'ville': row[8],
-        'nSiret': row[9]
+        "id_employe": row[0],
+        "solde": row[1],
+        "nom": row[2],
+        "prenom": row[3],
+        "mail": row[4],
+        "password": row[5],
+        "adresse": row[6],
+        "codepostal": row[7],
+        "ville": row[8],
+        "nsiret": row[9]
       });
     }
     ;
@@ -113,9 +104,9 @@ class EmployeModel {
         'mail': row[4],
         'password': row[5],
         'adresse': row[6],
-        'codePostal': row[7],
+        'codepostal': row[7],
         'ville': row[8],
-        'nSiret': row[9]
+        'nsiret': row[9]
       });
     }
 
@@ -124,17 +115,33 @@ class EmployeModel {
 
   getSolde(int id) async {
     List<List<dynamic>> results = await this.conn.query(
-        "SELECT ${this.solde} FROM ${this.table} WHERE id_employe=@id_employe",
+        "SELECT solde FROM ${this.table} WHERE id_employe=@id_employe",
         substitutionValues: {"id_employe": id});
+    this.solde = results[0][0];
     return this.solde;
   }
 
-  update(int id, {String name}) async {
+  //trouver le moyen de update chacun des datas de l'employe
+  //PUT/v1/employeurs/:id?mail=nouveauMail
+  //PUT/v1/employeurs/:id/mail?query=nouveauMail -> ici <param> = mail et
+  //value = nouveau Mail
+
+  update(int id, {String attribut}) async {
+    String nomAttribut = "nom";
     List<List<dynamic>> results = await this.conn.query(
-        "UPDATE ${this.table} SET nom=@nom WHERE id_employe=@id_employe",
-        substitutionValues: {"id_employe": id, "nom": name});
-    return await this.getAll();
+        "UPDATE ${this.table} SET $nomAttribut=@$nomAttribut WHERE id_employe=@id_employe",
+        substitutionValues: {"id_employe": id, "$nomAttribut": attribut});
+    return await this
+        .getAll(); // à voir si on laisse ce return : juste regarder le header
   }
+
+  updateSolde(int id, {double solde}) async {
+    List<List<dynamic>> results = await this.conn.query(
+        "UPDATE ${this.table} SET solde=@solde WHERE id_employe=@id_employe",
+        substitutionValues: {"id_employe": id, "solde": solde});
+  }
+
+  /*updateIdEntreprise(int id, {String nsiretEmployeur}){}*/
 
   destroy(int id) async {
     List<List<dynamic>> results = await this.conn.query(

@@ -12,6 +12,7 @@ void main() async {
   var PORT = portEnv == null ? 8080 : int.parse(portEnv);
   //Instantiate Home Controller
   final home = HomeController();
+
   // Create server
   final server = await shelf_io.serve(home.handler, '0.0.0.0', PORT);
   // Server on message

@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:convert';
 import "./connection.dart";
 import "../models/samplemodel.dart";
 import "../models/employe/employeModel.dart";
@@ -37,15 +39,14 @@ void main() async {
     'mail': "jean.dupont@beskar.com",
     'password': "azerty",
     'adresse': "223 rue du truc",
-    'codePostal': "69003",
+    'codepostal': "69003",
     'ville': "Lyon",
-    'nSiret': "12052045",
+    'nsiret': "12052045",
   };
   //var results = await employeModel.getAll();
-  var results = await employeModel.insert(params);
+  //var results = await employeModel.insert(params);
   //var r = await employeModel.destroy(11);
-  //var results = await samplemodel.(3, name: "Steve 2");
   var r = await employeModel.getAll();
-  print(r);
+  print(jsonEncode(r));
   db.conn.close();
 }

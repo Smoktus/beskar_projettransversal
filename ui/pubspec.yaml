@@ -22,6 +22,10 @@ environment:
 
 dependencies:
   provider: ^5.0.0
+  shelf: ^1.0.0
+  shelf_router: ^1.0.0
+  postgres: ^2.2.0
+  http: ^0.13.1
   flutter:
     sdk: flutter
 
