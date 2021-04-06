@@ -1,1 +1,1 @@
-export '../bin/server.dart';
+export 'bin/server.dart';

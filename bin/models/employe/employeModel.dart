@@ -121,16 +121,15 @@ class EmployeModel {
     return this.solde;
   }
 
-  //trouver le moyen de update chacun des datas de l'employe
-  //PUT/v1/employeurs/:id?mail=nouveauMail
-  //PUT/v1/employeurs/:id/mail?query=nouveauMail -> ici <param> = mail et
-  //value = nouveau Mail
-
-  update(int id, {String attribut}) async {
-    String nomAttribut = "nom";
+  //attribut ici est une maps {"nomAttribut" : attribut}
+  update(int id, attribut) async {
+    Map<String, dynamic> a = Map<String, dynamic>.from(attribut);
     List<List<dynamic>> results = await this.conn.query(
-        "UPDATE ${this.table} SET $nomAttribut=@$nomAttribut WHERE id_employe=@id_employe",
-        substitutionValues: {"id_employe": id, "$nomAttribut": attribut});
+        "UPDATE ${this.table} SET ${attribut.keys.first} =@${attribut.keys.first} WHERE id_employe=@id_employe",
+        substitutionValues: {
+          "id_employe": id,
+          "${attribut.keys.first}": attribut.values.first
+        });
     return await this
         .getAll(); // à voir si on laisse ce return : juste regarder le header
   }

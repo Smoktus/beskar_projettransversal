@@ -10,7 +10,7 @@ class EmployerController {
   Router get router {
     final router = Router();
 
-    //GET/v1/employes
+    //GET /employes
     router.get('/', (Request req) async {
       var Test = await modelEmploye();
       var results = await Test.getAll();
@@ -18,7 +18,7 @@ class EmployerController {
       return Response.ok(jsonEncode(results), headers: cors);
     });
 
-    //GET/v1/employeurs/:id
+    //GET /employes/:id
     router.get('/<param>', (Request req, String param) async {
       var Test = await modelEmploye();
       var results = await Test.getOne(int.parse(param));
@@ -26,7 +26,7 @@ class EmployerController {
       return Response.ok(jsonEncode(results), headers: cors);
     });
 
-    //POST /v1/employes
+    //POST /employes
 
     router.post('/', (Request req) async {
       final payload = await req.readAsString();
@@ -34,6 +34,15 @@ class EmployerController {
       var Test = await modelEmploye();
       var results = await Test.insert(jsonDecode(payload));
       print(results);
+      return Response.ok(payload, headers: cors);
+    });
+
+    //UPDATE /employes/:id
+    router.put('/<param>', (Request req, String param) async {
+      final payload = await req.readAsString();
+      //print(payload);
+      var Test = await modelEmploye();
+      var results = await Test.update(int.parse(param), jsonDecode(payload));
       return Response.ok(payload, headers: cors);
     });
 

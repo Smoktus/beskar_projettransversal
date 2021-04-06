@@ -4,6 +4,7 @@ import 'package:ui/screens/acceuil/acceuil_screen.dart';
 import 'package:ui/screens/connection/connection_screen.dart';
 import 'package:ui/screens/inscription/inscription_screen.dart';
 import 'package:ui/screens/parametre/parametre_screen.dart';
+import 'package:ui/screens/test_fetch/test_fetch.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -28,10 +29,11 @@ class Body extends StatelessWidget {
               onPressed: () =>
                   {Navigator.pushNamed(context, ConnectionScreen.routeName)},
               child: Text("Se connecter")),
-          /*ElevatedButton(
+          ElevatedButton(
               onPressed: () =>
-                  {Navigator.pushNamed(context, ParametreScreen.routeName)},
-              child: Text("Test Paramètre"))*/ //permet de tester la page paramètre
+                  {Navigator.pushNamed(context, FetchData.routeName)},
+              child:
+                  Text("Test Paramètre")) //permet de tester la page paramètre
         ],
       ),
     ));

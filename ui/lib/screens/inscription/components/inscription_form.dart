@@ -1,6 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shelf/shelf.dart';
+import 'package:http/http.dart' as http;
+
+Future<String> postPerson() async {
+  String url1 = 'https://beskarprojettransversal.herokuapp.com/test/';
+  String url = 'http://192.168.43.27:8080/solde/8';
+  final response = await http.get(Uri.parse(url1));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print(response.body);
+    return response.body;
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
+}
+
+Future<String> postPersonVoid(String role, param) async {
+  //String url1 = 'https://beskarprojettransversal.herokuapp.com/test/';
+  String url = 'http://192.168.43.27:8080/$role/';
+  final response = await http.post(Uri.parse(url), body: param);
+
+  if (response.statusCode == 200) {
+    print("Todo bien");
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    //return response.body;
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
+}
 
 class DropDownListProvider with ChangeNotifier {
   List<String> _items = ['Employé', 'Employeur', 'Commerçant'];
@@ -171,7 +207,7 @@ class _InscriptionFormState extends State<InscriptionForm> {
                     labelText: 'Code Postale',
                   ),
                   onSaved: (String value) {
-                    mapForm['codePostale'] = value;
+                    mapForm['codepostale'] = value;
                   },
                   validator: (String value) {
                     return (value.isEmpty)
@@ -212,7 +248,7 @@ class _InscriptionFormState extends State<InscriptionForm> {
                     labelText: 'Numéro de Siret',
                   ),
                   onSaved: (String value) {
-                    mapForm['nSiret'] = value;
+                    mapForm['nsiret'] = value;
                   },
                   validator: (String value) {
                     return (value.isEmpty)
@@ -229,6 +265,8 @@ class _InscriptionFormState extends State<InscriptionForm> {
                   _formKey.currentState.save();
                   print(mapForm);
                   if (role == 'Employé') {
+                    String typePersonne = "employes";
+                    postPerson();
                     //envoi de POST avec les infos de employé
                     //POST/v1/employeurs post(/v1/employeurs, contenu de la request)
                     //appel de la bonne branche du routeur
@@ -236,7 +274,7 @@ class _InscriptionFormState extends State<InscriptionForm> {
                     //aller à la page acceuil de l'employé
                     //création d'un employé en local
                     //création d'un employé avec l'api
-                    //shelf
+
                   } else if (role == 'Employeur') {
                   } else if (role == 'Commerçant') {}
                   //Navigator.pushNamed(context,"") // Mettre le bon écran d'acceuil
