@@ -99,11 +99,15 @@ class EmployeurModel {
     return list[0];
   }
 
-  update(int id, {String attribut}) async {
-    String nomAttribut = "nom";
+  update(int id, attribut) async {
+    //String nomAttribut = "nom";
+    Map<String, dynamic>.from(attribut);
     List<List<dynamic>> results = await this.conn.query(
-        "UPDATE ${this.table} SET $nomAttribut=@$nomAttribut WHERE id_entreprise=@id_entreprise",
-        substitutionValues: {"id_entreprise": id, "$nomAttribut": attribut});
+        "UPDATE ${this.table} SET ${attribut.keys.first}=@${attribut.keys.first} WHERE id_entreprise=@id_entreprise",
+        substitutionValues: {
+          "id_entreprise": id,
+          "${attribut.keys.first}": attribut.values.first
+        });
     return await this.getAll();
   }
 
