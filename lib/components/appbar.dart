@@ -10,6 +10,7 @@ class MyAppBar extends PreferredSize {
     return AppBar(
       backgroundColor: kAppBarColor,
       toolbarHeight: kAppBarHeight,
+      elevation: 4.0,
       leading: IconButton(
         icon: Icon(
           Icons.menu,

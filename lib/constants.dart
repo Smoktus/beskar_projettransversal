@@ -18,6 +18,7 @@ const kAppBarColor = Color(0xFFFFA269);
 const kNavBarColor = Color(0xFFFFFFFF);
 const kIconColor = Color(0xFF4D362D);
 const kIconSelectedColor = Color(0xFFFFA269);
+const kDividerColor = Color(0xFFE6DDDB);
 
 const double kAppBarHeight = 70.0;
 const double kNavBarHeight = 60.0;

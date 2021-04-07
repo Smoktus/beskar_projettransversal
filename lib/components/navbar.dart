@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants.dart';
 import 'package:flutter_app/models/NavItem.dart';
-import 'package:flutter_app/size_config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +31,7 @@ class MyBottomNavBar extends StatelessWidget {
               (index) => buildIconNavBarItem(
                 isActive: navItems.selectedIndex == index ? true : false,
                 icon: navItems.items[index].icon,
+                label: navItems.items[index].label,
                 press: () {
                   navItems.changeNavIndex(index: index);
                   if (navItems.items[index].destinationChecker())
@@ -50,15 +50,38 @@ class MyBottomNavBar extends StatelessWidget {
     );
   }
 
-  IconButton buildIconNavBarItem({String icon, Function press, bool isActive = false}) {
-    return IconButton(
+  Column buildIconNavBarItem({String icon, String label, Function press, bool isActive = false}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        IconButton(
+        icon: SvgPicture.asset(
+          icon,
+          color: isActive ? kIconSelectedColor : kIconColor,
+          //height: kNavBarHeight,
+          ),
+          //iconSize: kIconSize,
+          onPressed: press,
+        ),
+        /*Text(
+          label!=null?label:'Default Value',
+          style: TextStyle(
+            fontSize: 8,
+            fontWeight: FontWeight.bold,
+            color: kTextColorDark,
+            height: 0,
+          ),
+        ),*/
+      ],
+    );
+    /*return IconButton(
       icon: SvgPicture.asset(
         icon,
         color: isActive ? kIconSelectedColor : kIconColor,
-        height: kNavBarHeight,
+        //height: kNavBarHeight,
       ),
-      iconSize: kIconSize,
+      //iconSize: kIconSize,
       onPressed: press,
-    );
+    );*/
   }
 }
