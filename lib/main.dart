@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/routes.dart';
 //import 'package:flutter_app/theme.dart';
-import 'package:flutter_app/screens/employe/accueil/employe_accueil.dart';
+import 'package:flutter_app/screens/accueil/accueil_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'models/NavItem.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         title: 'Beskar',
         //theme: theme(),
         // home: SplashScreen(),
-        initialRoute: EmployeAccueil.routeName,
+        initialRoute: AccueilScreen.routeName,
         routes: routes,
       ),
     );
