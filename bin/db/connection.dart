@@ -15,7 +15,7 @@ class DB {
     var username =
         envVars["DB_USERNAME"] == null ? "postgres" : envVars["DB_USERNAME"];
     var password =
-        envVars["DB_PASSWORD"] == null ? "beskar" : envVars["DB_PASSWORD"];
+        envVars["DB_PASSWORD"] == null ? "test" : envVars["DB_PASSWORD"];
     this.conn = PostgreSQLConnection(host, port, database,
         username: username, password: password);
   }
