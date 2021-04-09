@@ -6,7 +6,7 @@ import 'package:shelf_router/shelf_router.dart';
 import '../cors.dart';
 import '../models/initiateModels.dart';
 
-class EmployerController {
+class EmployeController {
   Router get router {
     final router = Router();
 
@@ -44,6 +44,14 @@ class EmployerController {
       var Test = await modelEmploye();
       var results = await Test.update(int.parse(param), jsonDecode(payload));
       return Response.ok(payload, headers: cors);
+
+    });
+
+    //DELETE /employes/:id
+    router.delete('/<param>', (Request req, String param) async {
+      var Test = await modelEmploye();
+      void results = await Test.destroy(int.parse(param));
+      return Response.ok('Utilisateur supprimé', headers: cors);
     });
 
     router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));

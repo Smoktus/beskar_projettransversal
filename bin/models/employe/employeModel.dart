@@ -133,8 +133,8 @@ class EmployeModel {
     return await this
         .getAll(); // à voir si on laisse ce return : juste regarder le header
   }
-
-  updateSolde(int id, {double solde}) async {
+  //updateSolde(int id, {double solde}) async {
+  updateSolde(int id, double solde) async {
     List<List<dynamic>> results = await this.conn.query(
         "UPDATE ${this.table} SET solde=@solde WHERE id_employe=@id_employe",
         substitutionValues: {"id_employe": id, "solde": solde});
@@ -146,6 +146,5 @@ class EmployeModel {
     List<List<dynamic>> results = await this.conn.query(
         "DELETE FROM ${this.table} WHERE id_employe=@id_employe",
         substitutionValues: {"id_employe": id});
-    return await this.getAll();
   }
 }

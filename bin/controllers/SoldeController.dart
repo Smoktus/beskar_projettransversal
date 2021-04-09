@@ -27,6 +27,15 @@ class SoldeController {
       return Response.ok(jsonEncode(results), headers: cors);
     });*/
 
+    //UPDATE /solde/:id
+    router.put('/<param>', (Request req, String param) async {
+      final payload = await req.readAsString();
+      //print(payload);
+      var Test = await modelEmploye();
+      var results = await Test.updateSolde(int.parse(param), jsonDecode(payload));
+      return Response.ok(payload, headers: cors);
+    });
+
     router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));
 
     return router;
