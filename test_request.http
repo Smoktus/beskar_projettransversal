@@ -39,3 +39,7 @@ content-type: application/json
 {
   "solde" : "18"
 }
+
+###
+
+DELETE https://beskarprojettransversal.herokuapp.com/employes/59 HTTP/1.1
