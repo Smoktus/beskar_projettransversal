@@ -10,12 +10,12 @@ class DB {
     var port =
         envVars["DB_PORT"] == null ? 5432 : int.parse(envVars["DB_PORT"]);
     var database = envVars["DB_DATABASE"] == null
-        ? "postgres"
+        ? "dbbeskarfinal"
         : envVars["DB_DATABASE"];
     var username =
         envVars["DB_USERNAME"] == null ? "postgres" : envVars["DB_USERNAME"];
     var password =
-        envVars["DB_PASSWORD"] == null ? "test" : envVars["DB_PASSWORD"];
+        envVars["DB_PASSWORD"] == null ? "beskar" : envVars["DB_PASSWORD"];
     this.conn = PostgreSQLConnection(host, port, database,
         username: username, password: password);
   }
