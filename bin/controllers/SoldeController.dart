@@ -24,9 +24,8 @@ class SoldeController {
       print(payload);
       //print(param);
       var Test = await modelEmploye();
-
-      var results = await Test.updateSolde(
-          int.parse(param), jsonDecode(payload).values.first);
+      double solde = double.parse(jsonDecode(payload).values.first);
+      var results = await Test.updateSolde(int.parse(param), solde);
       return Response.ok(payload, headers: cors);
     });
 

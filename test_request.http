@@ -30,3 +30,12 @@ content-type: application/json
 {
   "solde" : "18"
 }
+
+###
+
+PUT http://localhost:8080/solde/8 HTTP/1.1
+content-type: application/json
+
+{
+  "solde" : "18"
+}
