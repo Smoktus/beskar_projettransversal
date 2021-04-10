@@ -9,9 +9,10 @@ void main() async {
   // Variable for PORT
   Map<String, String> envVars = Platform.environment;
   var portEnv = envVars['PORT'];
-  var PORT = portEnv == null ? 8080 : int.parse(portEnv);
+  var PORT = portEnv == null ? 8083 : int.parse(portEnv);
   //Instantiate Home Controller
   final home = HomeController();
+
   // Create server
   final server = await shelf_io.serve(home.handler, '0.0.0.0', PORT);
   // Server on message
