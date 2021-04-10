@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui/modelsData/employe.dart';
 import 'package:ui/screens/connection/components/connection_form.dart';
 import 'package:http/http.dart' as http;
+import 'package:ui/screens/employe/accueil/employe_accueil.dart';
+import 'package:ui/screens/employeur/accueil/employeur_liste_employes.dart';
 
 class Body extends StatelessWidget {
   bool isRemembered = true;
@@ -72,6 +74,8 @@ class Body extends StatelessWidget {
                         Employe e = Employe.fromJson(jsonDecode(response.body));
                         if (e.mail == mail && e.password == password) {
                           print("peut proceder à la suite");
+                          Navigator.popAndPushNamed(
+                              context, EmployeAccueil.routeName);
                         }
                       } else if (role == 'employeur') {
                         final int id_employeur = prefs.getInt('id_employeur');

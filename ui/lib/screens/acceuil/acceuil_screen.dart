@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/components/appbar.dart';
 import 'package:ui/screens/acceuil/components/body.dart';
 
 class AcceuilScreen extends StatelessWidget {
@@ -7,7 +8,8 @@ class AcceuilScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // You have to call it on your starting screen
     return Scaffold(
-      appBar: AppBar(
+      appBar: MyAppBar(),
+      /*AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -17,7 +19,7 @@ class AcceuilScreen extends StatelessWidget {
                 height: 48)
           ],
         ),
-      ),
+      ),*/
       body: Body(),
     );
   }

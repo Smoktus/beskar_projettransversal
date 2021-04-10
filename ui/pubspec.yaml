@@ -21,12 +21,15 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  #flutter_svg: ^0.18.0
   provider: ^5.0.0
   shelf: ^1.0.0
   shelf_router: ^1.0.0
   postgres: ^2.2.0
   http: ^0.13.1
   shared_preferences: ^2.0.5
+  flutter_svg: ^0.21.0
+
   flutter:
     sdk: flutter
 
@@ -45,4 +48,17 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/icons/
     - assets/images/
+
+  fonts:
+    - family: Proxima Nova
+      fonts:
+        - asset: assets/fonts/ProximaNova-Regular.otf
+        - asset: assets/fonts/Proxima Nova Bold.otf
+        - asset: assets/fonts/Proxima Nova Condensed Bold.otf
+          weight: 700
+    - family: Bookman Old Style
+      fonts:
+        - asset: assets/fonts/BOOKOSB.TTF
+          weight: 700
