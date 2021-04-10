@@ -1,5 +1,5 @@
 GET http://localhost:8083/solde/8
-
+###
 //PUT http://localhost:8080/employes/7 HTTP/1.1
 //content-type: application/json
 
@@ -7,7 +7,7 @@ GET http://localhost:8083/solde/8
   //"codepostal" : "Smith"
 //}
 //GET https://beskarprojettransversal.herokuapp.com/employes/
-
+###
 POST http://localhost:8080/employes/ HTTP/1.1
 content-type: application/json
 
@@ -22,3 +22,11 @@ content-type: application/json
     "nsiret": "12052045"
 }
 
+###
+
+PUT https://beskarprojettransversal.herokuapp.com/solde/8 HTTP/1.1
+content-type: application/json
+
+{
+  "solde" : "18"
+}

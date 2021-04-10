@@ -21,10 +21,12 @@ class SoldeController {
     //UPDATE /solde/:id
     router.put('/<param>', (Request req, String param) async {
       final payload = await req.readAsString();
-      //print(payload);
+      print(payload);
+      //print(param);
       var Test = await modelEmploye();
-      var results =
-          await Test.updateSolde(int.parse(param), jsonDecode(payload));
+
+      var results = await Test.updateSolde(
+          int.parse(param), jsonDecode(payload).values.first);
       return Response.ok(payload, headers: cors);
     });
 
