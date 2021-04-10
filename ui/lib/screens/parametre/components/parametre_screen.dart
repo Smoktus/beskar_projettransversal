@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:ui/models/employe.dart';
+import 'package:ui/modelsData/employe.dart';
 
 Future<Employe> fetchData() async {
   String role = 'employes';
