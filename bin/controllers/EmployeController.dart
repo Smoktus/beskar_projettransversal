@@ -6,7 +6,7 @@ import 'package:shelf_router/shelf_router.dart';
 import '../cors.dart';
 import '../models/initiateModels.dart';
 
-class EmployerController {
+class EmployeController {
   Router get router {
     final router = Router();
 
@@ -27,14 +27,13 @@ class EmployerController {
     });
 
     //POST /employes
-
     router.post('/', (Request req) async {
       final payload = await req.readAsString();
       print(payload);
       var Test = await modelEmploye();
       var results = await Test.insert(jsonDecode(payload));
       print(results);
-      return Response.ok(payload, headers: cors);
+      return Response.ok(results.toString(), headers: cors);
     });
 
     //UPDATE /employes/:id

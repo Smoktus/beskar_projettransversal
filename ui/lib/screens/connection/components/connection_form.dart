@@ -33,11 +33,6 @@ class _ConnectionForm extends State<ConnectionForm> {
             onChanged: (newValue) {
               checkedValue = newValue;
               provider.setValueChecked(checkedValue);
-              /*setState(() {
-                checkedValue = newValue;
-                //print(checkedValue);
-                
-              });*/
             },
             controlAffinity:
                 ListTileControlAffinity.leading, //  <-- leading Checkbox

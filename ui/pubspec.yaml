@@ -26,6 +26,7 @@ dependencies:
   shelf_router: ^1.0.0
   postgres: ^2.2.0
   http: ^0.13.1
+  shared_preferences: ^2.0.5
   flutter:
     sdk: flutter
 

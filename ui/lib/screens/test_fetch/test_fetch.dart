@@ -3,11 +3,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 Future<String> fetchAlbum() async {
-  String url1 = 'https://beskarprojettransversal.herokuapp.com/test/';
+  String url1 = 'https://beskarprojettransversal.herokuapp.com/employes/8';
   String url = 'http://192.168.43.27:8080/solde/8';
   String urlINSA = 'http://10.43.2.160:8080/solde/8';
-
-  final response = await http.get(Uri.parse(urlINSA));
+  String url2 = 'http://10.43.2.160:8080/employes/8';
+  final response = await http.get(Uri.parse(url2));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

@@ -57,10 +57,12 @@ class EmployeModel {
   //insert a new one !
   insert(params) async {
     String sql =
-        "insert into ${this.table} (nom, prenom, mail, password, adresse, codepostal, ville, nsiret) values (@nom, @prenom, @mail, @password, @adresse, @codepostal, @ville, @nsiret)";
+        "insert into ${this.table} (nom, prenom, mail, password, adresse, codepostal, ville, nsiret) values (@nom, @prenom, @mail, @password, @adresse, @codepostal, @ville, @nsiret) RETURNING id_employe";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
-    //return await this.getAll();
+    this.id_employe = result[0][0];
+    this.conn.close();
+    return this.id_employe;
   }
 
   getAll() async {
@@ -84,7 +86,7 @@ class EmployeModel {
       });
     }
     ;
-
+    this.conn.close();
     return list;
   }
 
@@ -109,7 +111,7 @@ class EmployeModel {
         'nsiret': row[9]
       });
     }
-
+    this.conn.close();
     return list[0];
   }
 
@@ -130,14 +132,15 @@ class EmployeModel {
           "id_employe": id,
           "${attribut.keys.first}": attribut.values.first
         });
-    return await this
-        .getAll(); // à voir si on laisse ce return : juste regarder le header
+    this.conn.close();
+    //return await this.getAll(); // à voir si on laisse ce return : juste regarder le header
   }
 
   updateSolde(int id, {double solde}) async {
     List<List<dynamic>> results = await this.conn.query(
         "UPDATE ${this.table} SET solde=@solde WHERE id_employe=@id_employe",
         substitutionValues: {"id_employe": id, "solde": solde});
+    this.conn.close();
   }
 
   /*updateIdEntreprise(int id, {String nsiretEmployeur}){}*/
@@ -146,6 +149,7 @@ class EmployeModel {
     List<List<dynamic>> results = await this.conn.query(
         "DELETE FROM ${this.table} WHERE id_employe=@id_employe",
         substitutionValues: {"id_employe": id});
-    return await this.getAll();
+    this.conn.close();
+    //return await this.getAll();
   }
 }
