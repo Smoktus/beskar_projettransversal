@@ -5,6 +5,7 @@ import 'package:shelf/shelf_io.dart' as shelf_io;
 import './TestController.dart';
 import '../cors.dart';
 import 'EmployeController.dart';
+import 'EmployeurController.dart';
 import 'SoldeController.dart';
 
 class HomeController {
@@ -20,6 +21,7 @@ class HomeController {
     // Mount Other Controllers Here
     router.mount('/test/', TestController().router);
     router.mount('/employes/', EmployeController().router);
+    router.mount('/employeurs/', EmployeurController().router);
     router.mount('/solde/', SoldeController().router);
     // You can catch all verbs and use a URL-parameter with a regular expression
     // that matches everything to catch app.
