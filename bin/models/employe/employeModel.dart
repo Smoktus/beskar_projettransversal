@@ -136,7 +136,7 @@ class EmployeModel {
     //return await this.getAll(); // à voir si on laisse ce return : juste regarder le header
   }
 
-  updateSolde(int id, {double solde}) async {
+  updateSolde(int id, double solde) async {
     List<List<dynamic>> results = await this.conn.query(
         "UPDATE ${this.table} SET solde=@solde WHERE id_employe=@id_employe",
         substitutionValues: {"id_employe": id, "solde": solde});
