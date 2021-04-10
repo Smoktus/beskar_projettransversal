@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,7 +53,7 @@ class Body extends StatelessWidget {
                     if (role == 'employes') {
                       final int id_employe = prefs.getInt('id_employe');
                       String url =
-                          'https://beskarprojettransversal.herokuapp.com/$roles/$id_employe';
+                          'https://beskarprojettransversal.herokuapp.com/$role/$id_employe';
                       final response = await http.get(Uri.parse(url));
                       Employe e = Employe.fromJson(jsonDecode(response.body));
                       //if(e.mail == )

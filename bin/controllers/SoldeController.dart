@@ -18,21 +18,13 @@ class SoldeController {
       return Response.ok(jsonEncode(results), headers: cors);
     });
 
-    // get request to "/test/<param>?query=????"
-    /*router.put('/<param>', (Request req, String param) async {
-      var Test = await modelEmploye();
-      var results = await Test.updateSolde(int.parse(param),
-          solde: double.parse(req.url.queryParameters["query"]));
-      print(results);
-      return Response.ok(jsonEncode(results), headers: cors);
-    });*/
-
     //UPDATE /solde/:id
     router.put('/<param>', (Request req, String param) async {
       final payload = await req.readAsString();
       //print(payload);
       var Test = await modelEmploye();
-      var results = await Test.updateSolde(int.parse(param), jsonDecode(payload));
+      var results =
+          await Test.updateSolde(int.parse(param), jsonDecode(payload));
       return Response.ok(payload, headers: cors);
     });
 
