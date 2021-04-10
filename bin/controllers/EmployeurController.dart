@@ -6,48 +6,48 @@ import 'package:shelf_router/shelf_router.dart';
 import '../cors.dart';
 import '../models/initiateModels.dart';
 
-class EmployeController {
+class EmployeurController {
   Router get router {
     final router = Router();
 
-    //GET /employes
+    //GET /employeurs
     router.get('/', (Request req) async {
-      var Test = await modelEmploye();
+      var Test = await modelEmployeur();
       var results = await Test.getAll();
       print(results);
       return Response.ok(jsonEncode(results), headers: cors);
     });
 
-    //GET /employes/:id
+    //GET /employeurs/:id
     router.get('/<param>', (Request req, String param) async {
-      var Test = await modelEmploye();
+      var Test = await modelEmployeur();
       var results = await Test.getOne(int.parse(param));
       print(results);
       return Response.ok(jsonEncode(results), headers: cors);
     });
 
-    //POST /employes
+    //POST /employeurs
     router.post('/', (Request req) async {
       final payload = await req.readAsString();
       print(payload);
-      var Test = await modelEmploye();
+      var Test = await modelEmployeur();
       var results = await Test.insert(jsonDecode(payload));
       print(results);
       return Response.ok(payload, headers: cors);
     });
 
-    //UPDATE /employes/:id
+    //UPDATE /employeurs/:id
     router.put('/<param>', (Request req, String param) async {
       final payload = await req.readAsString();
       //print(payload);
-      var Test = await modelEmploye();
+      var Test = await modelEmployeur();
       var results = await Test.update(int.parse(param), jsonDecode(payload));
       return Response.ok(payload, headers: cors);
     });
 
-    //DELETE /employes/:id
+    //DELETE /employeurs/:id
     router.delete('/<param>', (Request req, String param) async {
-      var Test = await modelEmploye();
+      var Test = await modelEmployeur();
       void results = await Test.destroy(int.parse(param));
       return Response.ok('Utilisateur supprimé', headers: cors);
     });
@@ -55,5 +55,6 @@ class EmployeController {
     router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));
 
     return router;
+
   }
 }

@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 class EmployeurModel {
   PostgreSQLConnection conn;
   String table;
+
   int id_entreprise;
   String nom, prenom;
   String mail, password;
