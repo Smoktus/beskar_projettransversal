@@ -31,7 +31,7 @@ class Body extends StatelessWidget {
               child: Text("Se connecter")),
           ElevatedButton(
               onPressed: () =>
-                  {Navigator.pushNamed(context, FetchData.routeName)},
+                  {Navigator.pushNamed(context, ParametreScreen.routeName)},
               child:
                   Text("Test Paramètre")) //permet de tester la page paramètre
         ],

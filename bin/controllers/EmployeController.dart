@@ -33,7 +33,7 @@ class EmployeController {
       var Test = await modelEmploye();
       var results = await Test.insert(jsonDecode(payload));
       print(results);
-      return Response.ok(payload, headers: cors);
+      return Response.ok(results.toString(), headers: cors);
     });
 
     //UPDATE /employes/:id
