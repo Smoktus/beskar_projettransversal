@@ -23,3 +23,9 @@ Future<EmployeurModel> modelEmployeur() async {
   await db.conn.open();
   return EmployeurModel(db.conn);
 }
+
+Future<CommercantModel> modelCommercant() async {
+  var db = DB();
+  await db.conn.open();
+  return CommercantModel(db.conn);
+}

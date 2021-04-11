@@ -43,11 +43,15 @@ class CommercantModel {
     };
   }
 
+  //pareil que employe
   insert(params) async {
     String sql =
         "insert into ${this.table} (nom, prenom, mail, password, adresse, codepostal, ville, nsiret) values (@nom, @prenom, @mail, @password, @adresse, @codepostal, @ville, @nsiret)";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
+    this.id_commercant = result[0][0];
+    this.conn.close();
+    return this.id_commercant;
     //return await this.getAll();
   }
 
@@ -71,13 +75,14 @@ class CommercantModel {
       });
     }
     ;
+    this.conn.close();
     return list;
   }
 
   getOne(int id) async {
     List<List<dynamic>> results = await this.conn.query(
-        "SELECT * FROM ${this.table} WHERE id=@id",
-        substitutionValues: {"id": id});
+        "SELECT * FROM ${this.table} WHERE id_commercant=@id_commercant",
+        substitutionValues: {"id_commercant": id});
 
     List<Map<String, dynamic>> list = [];
 
@@ -95,22 +100,39 @@ class CommercantModel {
       });
     }
     ;
-
+    this.conn.close();
     return list[0];
   }
 
-  update(int id, {String attribut}) async {
+  /* update(int id, {String attribut}) async {
     String nomAttribut = "nom";
     List<List<dynamic>> results = await this.conn.query(
         "UPDATE ${this.table} SET $nomAttribut=@$nomAttribut WHERE id_entreprise=@id_entreprise",
         substitutionValues: {"id_commercant": id, "$nomAttribut": attribut});
     return await this.getAll();
+  } */
+
+  //copie de employe
+
+  //attribut ici est une maps {"nomAttribut" : attribut}
+  update(int id, attribut) async {
+    Map<String, dynamic> a = Map<String, dynamic>.from(attribut);
+    List<List<dynamic>> results = await this.conn.query(
+        "UPDATE ${this.table} SET ${attribut.keys.first} =@${attribut.keys.first} WHERE id_commercant=@id_commercant",
+        substitutionValues: {
+          "id_commercant": id,
+          "${attribut.keys.first}": attribut.values.first
+        });
+    this.conn.close();
+    //return await this.getAll(); // à voir si on laisse ce return : juste regarder le header
   }
+
 
   destroy(int id) async {
     List<List<dynamic>> results = await this.conn.query(
         "DELETE FROM ${this.table} WHERE id_commercant=@id_commercant",
         substitutionValues: {"id_commercant": id});
-    return await this.getAll();
+    this.conn.close();
+    //return await this.getAll();
   }
 }
