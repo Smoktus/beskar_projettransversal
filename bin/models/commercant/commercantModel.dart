@@ -98,8 +98,7 @@ class CommercantModel {
         'ville': row[8],
         'nsiret': row[9]
       });
-    }
-    ;
+    };
     this.conn.close();
     return list[0];
   }
@@ -117,12 +116,16 @@ class CommercantModel {
   //attribut ici est une maps {"nomAttribut" : attribut}
   update(int id, attribut) async {
     Map<String, dynamic> a = Map<String, dynamic>.from(attribut);
+    for (var entry in attribut.entries) {
+      //print(entry.key);
+      //print(entry.value);
     List<List<dynamic>> results = await this.conn.query(
-        "UPDATE ${this.table} SET ${attribut.keys.first} =@${attribut.keys.first} WHERE id_commercant=@id_commercant",
+        "UPDATE ${this.table} SET ${entry.key} =@${entry.key} WHERE id_commercant=@id_commercant",
         substitutionValues: {
           "id_commercant": id,
-          "${attribut.keys.first}": attribut.values.first
+          "${entry.key}": entry.value
         });
+    }
     this.conn.close();
     //return await this.getAll(); // à voir si on laisse ce return : juste regarder le header
   }

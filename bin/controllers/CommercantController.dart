@@ -55,4 +55,5 @@ class CommercantController {
     router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));
 
     return router;
+  }
 }
