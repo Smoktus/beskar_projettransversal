@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ui/constants.dart';
 
 class ConnectionFormProvider with ChangeNotifier {
   bool _newValue;
@@ -29,7 +30,7 @@ class _ConnectionForm extends State<ConnectionForm> {
           return CheckboxListTile(
             title: Text("Se rappeler de moi ?"),
             value: checkedValue,
-            activeColor: Colors.cyan,
+            activeColor: kButtonColor,
             onChanged: (newValue) {
               checkedValue = newValue;
               provider.setValueChecked(checkedValue);

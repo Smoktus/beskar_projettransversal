@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../constants.dart';
+
 /*Future<String> postPerson() async {
   String url1 = 'https://beskarprojettransversal.herokuapp.com/test/';
   String url = 'http://192.168.43.27:8080/solde/8';
@@ -75,10 +77,17 @@ class _InscriptionFormState extends State<InscriptionForm> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Text("Formulaire d'inscription",
+                style: TextStyle(
+                  fontSize: 24,
+                )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("Rôle"),
+                Text("Rôle",
+                    style: TextStyle(
+                      fontSize: 18,
+                    )),
                 Consumer<DropDownListProvider>(
                   builder: (_, provider, __) {
                     return DropdownButton<String>(
@@ -265,6 +274,9 @@ class _InscriptionFormState extends State<InscriptionForm> {
               ],
             ),
             ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(kButtonColor)),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();

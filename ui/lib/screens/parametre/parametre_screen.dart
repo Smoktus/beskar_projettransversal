@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ui/screens/parametre/components/body.dart';
 
+import '../../constants.dart';
+
 class ParametreScreen extends StatelessWidget {
   static String routeName = "/parametre";
   @override
@@ -9,16 +11,11 @@ class ParametreScreen extends StatelessWidget {
     return Scaffold(
       //Peut-etre changer cette AppBar
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(
-                image: AssetImage('assets/images/logo2.png'),
-                fit: BoxFit.contain,
-                height: 48)
-          ],
-        ),
-      ),
+          backgroundColor: kAppBarColor,
+          toolbarHeight: kAppBarHeight,
+          centerTitle: true,
+          title: Image.asset("assets/images/logo.png",
+              scale: 10, color: kIconColor)),
       body: Body(),
     );
   }

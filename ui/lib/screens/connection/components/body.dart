@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 import 'package:ui/screens/employe/accueil/employe_accueil.dart';
 import 'package:ui/screens/employeur/accueil/employeur_liste_employes.dart';
 
+import '../../../constants.dart';
+
 class Body extends StatelessWidget {
   bool isRemembered = true;
   String mail;
@@ -26,10 +28,13 @@ class Body extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                cursorColor: kButtonColor,
                 decoration: const InputDecoration(
-                  icon: Icon(Icons.mail),
-                  labelText: 'Username',
-                ),
+                    icon: Icon(Icons.mail),
+                    labelText: 'Username',
+                    fillColor: kButtonColor,
+                    hoverColor: kButtonColor,
+                    focusColor: kButtonColor),
                 onSaved: (String value) {
                   mail = value;
                 },
@@ -40,6 +45,7 @@ class Body extends StatelessWidget {
                 },
               ),
               TextFormField(
+                cursorColor: kButtonColor,
                 obscureText: true,
                 decoration: const InputDecoration(
                   icon: Icon(Icons.lock),
@@ -61,6 +67,9 @@ class Body extends StatelessWidget {
                 return ConnectionForm();
               }),
               ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(kButtonColor)),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();

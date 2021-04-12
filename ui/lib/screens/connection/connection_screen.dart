@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/appbar.dart';
 
+import '../../constants.dart';
 import 'components/body.dart';
 
 class ConnectionScreen extends StatelessWidget {
@@ -8,7 +9,12 @@ class ConnectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
+      appBar: AppBar(
+          backgroundColor: kAppBarColor,
+          toolbarHeight: kAppBarHeight,
+          centerTitle: true,
+          title: Image.asset("assets/images/logo.png",
+              scale: 10, color: kIconColor)),
       body: Body(),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ui/constants.dart';
 import 'package:ui/models/NavItem.dart';
 import 'package:ui/screens/acceuil/acceuil_screen.dart';
 import 'package:ui/routes.dart';
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Beskar',
+        theme:
+            ThemeData(primaryColor: kButtonColor, fontFamily: 'Proxima Nova'),
         debugShowCheckedModeBanner: false,
         initialRoute: AcceuilScreen.routeName,
         routes: routes);

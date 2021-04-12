@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ui/screens/parametre/parametre_screen.dart';
 
 class MyAppBar extends PreferredSize {
   Size get preferredSize => Size.fromHeight(kAppBarHeight);
@@ -25,7 +26,9 @@ class MyAppBar extends PreferredSize {
       actions: [
         IconButton(
           icon: SvgPicture.asset("assets/icons/profil.svg", color: kIconColor),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.popAndPushNamed(context, ParametreScreen.routeName);
+          },
         )
       ],
     );

@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+import 'package:ndef/ndef.dart' as ndef;
+import 'package:camera/camera.dart';
+
+List<CameraDescription> cameras;
 
 Future<String> fetchAlbum() async {
   String url1 = 'https://beskarprojettransversal.herokuapp.com/employes/8';
@@ -20,7 +26,19 @@ Future<String> fetchAlbum() async {
   }
 }
 
+Future<void> testNFC() async {
+  var availability = await FlutterNfcKit.nfcAvailability;
+  if (availability != NFCAvailability.available) {
+    print("dur");
+  }
+  print("cool");
+}
+
 //void main() => runApp(MyApp());
+Future<void> getCameras() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+}
 
 class FetchData extends StatefulWidget {
   //MyApp({Key key}) : super(key: key);
@@ -31,13 +49,30 @@ class FetchData extends StatefulWidget {
 
 class _FetchData extends State<FetchData> {
   //late Future<Album> futureAlbum;
-
+  String tagStr;
+  bool _isSupported = false;
   Future<String> futureRes;
-
+  Future<void> _cameras;
+  CameraController controller;
   @override
   void initState() {
     super.initState();
-    futureRes = fetchAlbum();
+    //futureRes = fetchAlbum();
+    //_nfcTest = testNFC();
+    _cameras = getCameras();
+    controller = CameraController(cameras[1], ResolutionPreset.max);
+    controller.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 
   @override
@@ -51,20 +86,18 @@ class _FetchData extends State<FetchData> {
         appBar: AppBar(
           title: Text('Fetch Data Example'),
         ),
-        body: Center(
-          child: FutureBuilder<String>(
-            future: futureRes,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data);
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-
-              // By default, show a loading spinner.
-              return CircularProgressIndicator();
-            },
-          ),
+        body: Column(
+          children: [
+            FutureBuilder<void>(
+                future: _cameras,
+                builder: (context, snapshot) {
+                  return Center(
+                    child: (_cameras == null)
+                        ? CircularProgressIndicator()
+                        : CameraPreview(controller),
+                  );
+                })
+          ],
         ),
       ),
     );
