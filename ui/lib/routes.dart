@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:ui/screens/acceuil/acceuil_screen.dart';
+import 'package:ui/screens/commercant/acceuil/commercant_acceuil.dart';
+import 'package:ui/screens/commercant/encaissement/encaissement_screen.dart';
+import 'package:ui/screens/commercant/historique/historique_screen.dart';
 import 'package:ui/screens/connection/connection_screen.dart';
 import 'package:ui/screens/employe/accueil/employe_accueil.dart';
 import 'package:ui/screens/employe/commerces/employe_commerces.dart';
@@ -25,4 +28,7 @@ final Map<String, WidgetBuilder> routes = {
   EmployeCommerces.routeName: (context) => EmployeCommerces(),
   EmployeMap.routeName: (context) => EmployeMap(),
   EmployeurAccueil.routeName: (context) => EmployeurAccueil(),
+  CommercantAcceuil.routeName: (context) => CommercantAcceuil(),
+  CommercantEncaissement.routeName: (context) => CommercantEncaissement(),
+  CommercantHistorique.routeName: (context) => CommercantHistorique()
 };

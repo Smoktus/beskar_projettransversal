@@ -126,12 +126,13 @@ class EmployeModel {
   //attribut ici est une maps {"nomAttribut" : attribut}
   update(int id, attribut) async {
     Map<String, dynamic> a = Map<String, dynamic>.from(attribut);
-    List<List<dynamic>> results = await this.conn.query(
-        "UPDATE ${this.table} SET ${attribut.keys.first} =@${attribut.keys.first} WHERE id_employe=@id_employe",
-        substitutionValues: {
-          "id_employe": id,
-          "${attribut.keys.first}": attribut.values.first
-        });
+    for (var entry in attribut.entries) {
+      //print(entry.key);
+      //print(entry.value);
+      List<List<dynamic>> results = await this.conn.query(
+          "UPDATE ${this.table} SET ${entry.key} =@${entry.key} WHERE id_employe=@id_employe",
+          substitutionValues: {"id_employe": id, "${entry.key}": entry.value});
+    }
     this.conn.close();
     //return await this.getAll(); // à voir si on laisse ce return : juste regarder le header
   }

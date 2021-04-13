@@ -60,7 +60,7 @@ class _FetchData extends State<FetchData> {
     //futureRes = fetchAlbum();
     //_nfcTest = testNFC();
     _cameras = getCameras();
-    controller = CameraController(cameras[1], ResolutionPreset.max);
+    controller = CameraController(cameras[0], ResolutionPreset.max);
     controller.initialize().then((_) {
       if (!mounted) {
         return;

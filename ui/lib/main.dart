@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/constants.dart';
 import 'package:ui/models/NavItem.dart';
+import 'package:ui/models/NavItemCommercant.dart';
 import 'package:ui/screens/acceuil/acceuil_screen.dart';
 import 'package:ui/routes.dart';
 import 'package:ui/screens/connection/components/connection_form.dart';
@@ -14,6 +15,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => DropDownListProvider()),
         ChangeNotifierProvider(create: (_) => ConnectionFormProvider()),
         ChangeNotifierProvider(create: (_) => NavItems()),
+        ChangeNotifierProvider(create: (_) => NavItemsCommercant()),
       ],
       child: MyApp(),
     ),

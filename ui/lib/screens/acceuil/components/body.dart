@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/screens/acceuil/acceuil_screen.dart';
+import 'package:ui/screens/commercant/acceuil/commercant_acceuil.dart';
 import 'package:ui/screens/connection/connection_screen.dart';
 import 'package:ui/screens/inscription/inscription_screen.dart';
 import 'package:ui/screens/parametre/parametre_screen.dart';
@@ -39,7 +40,7 @@ class Body extends StatelessWidget {
               child: Text("Se connecter")),
           ElevatedButton(
               onPressed: () =>
-                  {Navigator.pushNamed(context, FetchData.routeName)},
+                  {Navigator.pushNamed(context, CommercantAcceuil.routeName)},
               child:
                   Text("Test Paramètre")) //permet de tester la page paramètre
         ],

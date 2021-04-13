@@ -8,6 +8,7 @@ GET http://localhost:8083/solde/8
 //}
 //GET https://beskarprojettransversal.herokuapp.com/employes/
 ###
+
 POST http://localhost:8080/employes/ HTTP/1.1
 content-type: application/json
 
@@ -38,4 +39,15 @@ content-type: application/json
 
 {
   "solde" : "18"
+}
+
+###
+
+PUT http://localhost:8080/employes/8 HTTP/1.1
+content-type: application/json
+
+{
+  "nom" : "MBappe",
+  "prenom": "Kylian",
+  "mail" : "kylian.mbappe@beskar.com"
 }
