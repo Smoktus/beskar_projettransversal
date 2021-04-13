@@ -36,4 +36,12 @@ class Transaction {
         date_transaction: json["date_transaction"],
         prix_vente: json["prix_vente"]);
   }
+  /*Map<String, dynamic> toJsonfromTransaction(Transaction t) {
+    Map<String, dynamic> a = {
+      "id_transaction": t.id_transaction,
+      "date_transaction": t.date_transaction,
+      "prix_vente": t.prix_vente
+    };
+    return a;
+  }*/
 }

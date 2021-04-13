@@ -17,6 +17,7 @@ class _EncaissementField extends State<EncaissementField> {
   final myController = TextEditingController();
   bool _isPressed = false;
   Timer _timer;
+  Map<String, dynamic> _QRCodeData;
   @override
   void dispose() {
     myController.dispose();
@@ -30,9 +31,9 @@ class _EncaissementField extends State<EncaissementField> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
-          child: (_isPressed)
+          child: (_isPressed && _QRCodeData != null)
               ? QrImage(
-                  data: "www.insa-lyon.fr",
+                  data: jsonEncode(_QRCodeData),
                   version: QrVersions.auto,
                   size: 320,
                   gapless: false,
@@ -75,6 +76,12 @@ class _EncaissementField extends State<EncaissementField> {
               final response =
                   await http.post(Uri.parse(url), body: jsonEncode(body));
               print(response.statusCode);
+              _QRCodeData = {
+                "date_transaction": DateTime.now().toString(),
+                "prix_vente": montant,
+                "id_transaction": 3 //int.parse(response.body)
+              };
+              //if (response.statusCode == 404) {
               setState(() {
                 _isPressed = true;
               });
@@ -93,6 +100,7 @@ class _EncaissementField extends State<EncaissementField> {
                     });
               });
             },
+            //},
             child: Text("Enregistrer une transaction"))
       ],
     ));
