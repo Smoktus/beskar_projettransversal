@@ -21,7 +21,7 @@ class CreditController {
     //GET/v1/credits
     router.get('/', (Request req) async {
       var Test = await modelCredit();
-      var results = await Test.getCredHistory(int.parse(param));
+      var results = await Test.getCredHistory();
       print(results);
       return Response.ok(jsonEncode(results), headers: cors);
     });
@@ -45,4 +45,5 @@ class CreditController {
       print(results);
       return Response.ok(results.toString(), headers: cors);
     }); */
+  }
 }
