@@ -7,6 +7,7 @@ class Transaction {
   final double prix_vente;
   int id_employe;
   int id_commercant;
+  int id_facture;
 
   Transaction({this.id_transaction, this.date_transaction, this.prix_vente});
 
@@ -15,7 +16,8 @@ class Transaction {
       this.date_transaction,
       this.prix_vente,
       this.id_employe,
-      this.id_commercant});
+      this.id_commercant,
+      this.id_facture});
 
   Map<String, dynamic> toJson(String data) {
     return jsonDecode(data);
@@ -27,7 +29,8 @@ class Transaction {
         date_transaction: json["date_transaction"],
         prix_vente: json["prix_vente"],
         id_employe: json["id_employe"],
-        id_commercant: json["id_commercant"]);
+        id_commercant: json["id_commercant"],
+        id_facture: json["id_facture"]);
   }
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
