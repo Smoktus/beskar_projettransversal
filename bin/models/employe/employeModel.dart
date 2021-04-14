@@ -110,7 +110,7 @@ class EmployeModel {
         'ville': row[8],
         'nsiret': row[9]
       });
-    }
+    };
     this.conn.close();
     return list[0];
   }

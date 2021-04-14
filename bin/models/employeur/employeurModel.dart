@@ -47,9 +47,12 @@ class EmployeurModel {
 
   insert(params) async {
     String sql =
-        "insert into ${this.table} (nom, prenom, mail, password, ville, codepostal, adresse, nsiret) values (@nom, @prenom, @mail, @password, @ville, @codepostal, @adresse, @nsiret)";
+        "insert into ${this.table} (nom, prenom, mail, password, ville, codepostal, adresse, nsiret) values (@nom, @prenom, @mail, @password, @ville, @codepostal, @adresse, @nsiret) RETURNING id_entreprise";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
+    this.id_entreprise = result[0][0];
+    this.conn.close();
+    return this.id_entreprise;
   }
 
   getAll() async {
@@ -70,15 +73,15 @@ class EmployeurModel {
         'adresse': row[7],
         'nsiret': row[8]
       });
-    }
-    ;
+    };
+    this.conn.close();
     return list;
   }
 
   getOne(int id) async {
     List<List<dynamic>> results = await this.conn.query(
-        "SELECT * FROM ${this.table} WHERE id=@id",
-        substitutionValues: {"id": id});
+        "SELECT * FROM ${this.table} WHERE id_entreprise=@id_entreprise",
+        substitutionValues: {"id_entreprise": id});
 
     List<Map<String, dynamic>> list = [];
 
@@ -95,23 +98,20 @@ class EmployeurModel {
         'nsiret': row[8]
       });
     }
-    ;
-
+    this.conn.close();
     return list[0];
   }
 
+  //attribut ici est une maps {"nomAttribut" : attribut}
   update(int id, attribut) async {
     //String nomAttribut = "nom";
-    Map<String, dynamic>.from(attribut);
+    Map<String, dynamic> a = Map<String, dynamic>.from(attribut);
     for (var entry in attribut.entries) {
       //print(entry.key);
       //print(entry.value);
       List<List<dynamic>> results = await this.conn.query(
           "UPDATE ${this.table} SET ${entry.key}=@${entry.key} WHERE id_entreprise=@id_entreprise",
-          substitutionValues: {
-            "id_entreprise": id,
-            "${entry.key}": entry.value
-          });
+          substitutionValues: {"id_entreprise": id, "${entry.key}": entry.value});
     }
     this.conn.close();
     return await this.getAll();
@@ -121,6 +121,7 @@ class EmployeurModel {
     List<List<dynamic>> results = await this.conn.query(
         "DELETE FROM ${this.table} WHERE id_entreprise=@id_entreprise",
         substitutionValues: {"id_entreprise": id});
-    return await this.getAll();
+    this.conn.close();
+    //return await this.getAll();
   }
 }
