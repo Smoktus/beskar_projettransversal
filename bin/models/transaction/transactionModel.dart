@@ -87,7 +87,17 @@ class TransactionModel {
     return list;
   }
 
-  getAllCommercant(int id_commercant) async {}
+  getCommercantHistory(/*int id_commercant*/) async {
+    String sql =
+        """SELECT id_credit,credit.id_commercant,commercant.nom,commercant.prenom,prix_vente,date_transaction
+        FROM ${this.table}
+        INNER JOIN commercant
+        ON commercant.id_commercant = credit.id_commercant""";
+    List<List<dynamic>> results = await conn
+        .query(sql, substitutionValues: {"id_transaction": id_transaction});
+
+    List<Map<String, dynamic>> list = [];
+  }
 
   destroy(int id_transaction) async {
     List<List<dynamic>> results = await this.conn.query(

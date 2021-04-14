@@ -61,6 +61,16 @@ POST https://beskarprojettransversal.herokuapp.com/transactions/ HTTP/1.1
 content-type: application/json
 
 {
-  "prix_vente": 13,
-  "id_commercant": 1
+  "prix_vente": 28,
+  "id_commercant": 2
 }
+
+###
+DELETE https://beskarprojettransversal.herokuapp.com/transactions/8 HTTP/1.1
+content-type: application/json
+###
+GET https://beskarprojettransversal.herokuapp.com/transactions/ HTTP/1.1
+content-type: application/json
+###
+GET https://beskarprojettransversal.herokuapp.com/transactions/ HTTP/1.1
+content-type: application/json
