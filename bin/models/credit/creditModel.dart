@@ -43,7 +43,7 @@ class CreditModel {
 
   //a credit is a POST made by an employer, that updates the solde of one or all of his employes
   // POST/v1/credits
-  insert(params) async {
+  /*insert(params) async {
     String sql =
         """INSERT INTO ${this.table} (id_employe, id_entreprise, montant, horodate_credit) values (@id_employe, @id_entreprise, @montant, to_char(current_timestamp, 'DD-Mon-YYYY:HH12:MI:SS')) RETURNING id_credit;
         UPDATE employe SET solde=solde + @montant WHERE id_employe=@id_employe;""";
@@ -52,7 +52,22 @@ class CreditModel {
     this.id_credit = result[0][0];
     this.conn.close();
     return this.id_employe;
+  } */
+
+  insert(params) async {
+    String sql1 =
+    """INSERT INTO ${this.table} (id_employe, id_entreprise, montant, horodate_credit)
+       values (@id_employe, @id_entreprise, @montant, to_char(current_timestamp, 'DD-Mon-YYYY:HH12:MI:SS')) 
+       RETURNING id_credit;""";
+    String sql2 = "UPDATE employe SET solde=solde + @montant WHERE id_employe=@id_employe;";
+    List<List<dynamic>> result =
+    await conn.query(sql1, substitutionValues: params);
+    await conn.query(sql2, substitutionValues: params);
+    this.id_credit = result[0][0];
+    this.conn.close();
+    return this.id_employe;
   }
+
 
 
   //GET/v1/credits
