@@ -32,7 +32,7 @@ class TransactionController {
     router.post('/', (Request req) async {
       final payload = await req.readAsString();
       print(payload);
-      var Test = await modelCommercant();
+      var Test = await modelTransaction();
       var results = await Test.insert(jsonDecode(payload));
       print(results);
       return Response.ok(results.toString(), headers: cors);
