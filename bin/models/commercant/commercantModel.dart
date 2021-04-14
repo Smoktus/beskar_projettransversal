@@ -46,7 +46,8 @@ class CommercantModel {
   //pareil que employe
   insert(params) async {
     String sql =
-        "insert into ${this.table} (nom, prenom, mail, password, adresse, codepostal, ville, nsiret) values (@nom, @prenom, @mail, @password, @adresse, @codepostal, @ville, @nsiret)";
+        """insert into ${this.table} (nom, prenom, mail, password, adresse, codepostal, ville, nsiret) values 
+        (@nom, @prenom, @mail, @password, @adresse, @codepostal, @ville, @nsiret)""";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
     this.id_commercant = result[0][0];
@@ -98,7 +99,8 @@ class CommercantModel {
         'ville': row[8],
         'nsiret': row[9]
       });
-    };
+    }
+    ;
     this.conn.close();
     return list[0];
   }
@@ -119,17 +121,16 @@ class CommercantModel {
     for (var entry in attribut.entries) {
       //print(entry.key);
       //print(entry.value);
-    List<List<dynamic>> results = await this.conn.query(
-        "UPDATE ${this.table} SET ${entry.key} =@${entry.key} WHERE id_commercant=@id_commercant",
-        substitutionValues: {
-          "id_commercant": id,
-          "${entry.key}": entry.value
-        });
+      List<List<dynamic>> results = await this.conn.query(
+          "UPDATE ${this.table} SET ${entry.key} =@${entry.key} WHERE id_commercant=@id_commercant",
+          substitutionValues: {
+            "id_commercant": id,
+            "${entry.key}": entry.value
+          });
     }
     this.conn.close();
     //return await this.getAll(); // à voir si on laisse ce return : juste regarder le header
   }
-
 
   destroy(int id) async {
     List<List<dynamic>> results = await this.conn.query(

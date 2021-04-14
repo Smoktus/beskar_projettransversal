@@ -130,12 +130,8 @@ class EmployeModel {
       //print(entry.key);
       //print(entry.value);
       List<List<dynamic>> results = await this.conn.query(
-          "UPDATE ${this.table} SET ${entry.key} =@${entry
-              .key} WHERE id_employe=@id_employe",
-          substitutionValues: {
-            "id_employe": id,
-            "${entry.key}": entry.value
-          });
+          "UPDATE ${this.table} SET ${entry.key} =@${entry.key} WHERE id_employe=@id_employe",
+          substitutionValues: {"id_employe": id, "${entry.key}": entry.value});
     }
     this.conn.close();
     //return await this.getAll(); // à voir si on laisse ce return : juste regarder le header

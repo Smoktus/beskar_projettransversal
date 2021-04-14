@@ -6,6 +6,7 @@ import 'employe/employeModel.dart';
 import 'employeur/employeurModel.dart';
 import 'commercant/commercantModel.dart';
 import 'credit/creditModel.dart';
+import 'transaction/transactionModel.dart';
 
 Future<SampleModel> model() async {
   var db = DB();
@@ -35,4 +36,10 @@ Future<CreditModel> modelCredit() async {
   var db = DB();
   await db.conn.open();
   return CreditModel(db.conn);
+}
+
+Future<TransactionModel> modelTransaction() async {
+  var db = DB();
+  await db.conn.open();
+  return TransactionModel(db.conn);
 }
