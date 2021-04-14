@@ -52,10 +52,10 @@ class TransactionModel {
     for (final row in results) {
       list.add({
         "id_transaction": row[0],
-        "prix_vente": row[1],
-        "date_transaction": row[2],
-        "id_commercant": row[3],
-        "id_employe": row[4],
+        "date_transaction": row[1],
+        "prix_vente": row[2],
+        "id_employe": row[3],
+        "id_commercant": row[4],
         "id_facture": row[5],
       });
     }
@@ -72,13 +72,13 @@ class TransactionModel {
 
     List<Map<String, dynamic>> list = [];
 
-    for (final row in results) {
+  for (final row in results) {
       list.add({
         "id_transaction": row[0],
-        "prix_vente": row[1],
-        "date_transaction": row[2],
-        "id_commercant": row[3],
-        "id_employe": row[4],
+        "date_transaction": row[1],
+        "prix_vente": row[2],
+        "id_employe": row[3],
+        "id_commercant": row[4],
         "id_facture": row[5],
       });
     }
@@ -87,7 +87,17 @@ class TransactionModel {
     return list;
   }
 
-  getAllCommercant(int id_commercant) async {}
+  getCommercantHistory(/*int id_commercant*/) async {
+    String sql =
+        """SELECT id_credit,credit.id_commercant,commercant.nom,commercant.prenom,prix_vente,date_transaction
+        FROM ${this.table}
+        INNER JOIN commercant
+        ON commercant.id_commercant = credit.id_commercant""";
+    List<List<dynamic>> results = await conn
+        .query(sql, substitutionValues: {"id_transaction": id_transaction});
+
+    List<Map<String, dynamic>> list = [];
+  }
 
   destroy(int id_transaction) async {
     List<List<dynamic>> results = await this.conn.query(
