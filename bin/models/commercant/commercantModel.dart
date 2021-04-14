@@ -47,7 +47,7 @@ class CommercantModel {
   insert(params) async {
     String sql =
         """insert into ${this.table} (nom, prenom, mail, password, adresse, codepostal, ville, nsiret) values 
-        (@nom, @prenom, @mail, @password, @adresse, @codepostal, @ville, @nsiret)""";
+        (@nom, @prenom, @mail, @password, @adresse, @codepostal, @ville, @nsiret) RETURNING id_commercant""";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
     this.id_commercant = result[0][0];

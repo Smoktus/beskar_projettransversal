@@ -46,13 +46,13 @@ POST https://beskarprojettransversal.herokuapp.com/commercants/ HTTP/1.1
 content-type: application/json
 
 { 
-    "nom": "Dupond",
-    "prenom": "Charles",
-    "mail": "dupond.charles@beskar-restaurant.com",
+    "nom": "Kylian",
+    "prenom": "MBaporshe",
+    "mail": "Kylian.MBaporshe@beskar-restaurant.com",
     "password": "ytreza",
     "adresse": "223 rue du truc",
     "codepostal": "69003",
-    "ville": "Orleans",
+    "ville": "Paris",
     "nsiret": "12052045"
 }
 
