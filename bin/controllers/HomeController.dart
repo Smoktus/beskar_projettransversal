@@ -9,6 +9,7 @@ import 'SoldeController.dart';
 import 'EmployeurController.dart';
 import 'CommercantController.dart';
 import 'CreditController.dart';
+import 'transactionsController.dart';
 
 class HomeController {
   // Define our getter for our handler
@@ -27,6 +28,7 @@ class HomeController {
     router.mount('/employeurs/', EmployeurController().router);
     router.mount('/commercants/', CommercantController().router);
     router.mount('/credits/', CreditController().router);
+    router.mount('/transactions/', TransactionController().router);
     // You can catch all verbs and use a URL-parameter with a regular expression
     // that matches everything to catch app.
     router.all('/<ignored|.*>', (Request request) {

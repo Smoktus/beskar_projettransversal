@@ -6,7 +6,8 @@ GET http://localhost:8083/solde/8
 //{
   //"codepostal" : "Smith"
 //}
-//GET https://beskarprojettransversal.herokuapp.com/employes/
+###
+GET https://beskarprojettransversal.herokuapp.com/employes/
 ###
 POST http://localhost:8080/employes/ HTTP/1.1
 content-type: application/json
@@ -38,4 +39,28 @@ content-type: application/json
 
 {
   "solde" : "18"
+}
+
+###
+POST https://beskarprojettransversal.herokuapp.com/commercants/ HTTP/1.1
+content-type: application/json
+
+{ 
+    "nom": "Kylian",
+    "prenom": "MBaporshe",
+    "mail": "Kylian.MBaporshe@beskar-restaurant.com",
+    "password": "ytreza",
+    "adresse": "223 rue du truc",
+    "codepostal": "69003",
+    "ville": "Paris",
+    "nsiret": "12052045"
+}
+
+###
+POST https://beskarprojettransversal.herokuapp.com/transactions/ HTTP/1.1
+content-type: application/json
+
+{
+  "prix_vente": 13,
+  "id_commercant": 1
 }
