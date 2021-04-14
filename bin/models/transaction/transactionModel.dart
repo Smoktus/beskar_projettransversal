@@ -54,8 +54,8 @@ class TransactionModel {
         "id_transaction": row[0],
         "prix_vente": row[1],
         "date_transaction": row[2],
-        "id_commercant": row[3],
-        "id_employe": row[4],
+        "id_employe": row[3],
+        "id_commercant": row[4],
         "id_facture": row[5],
       });
     }
@@ -77,8 +77,8 @@ class TransactionModel {
         "id_transaction": row[0],
         "prix_vente": row[1],
         "date_transaction": row[2],
-        "id_commercant": row[3],
-        "id_employe": row[4],
+        "id_employe": row[3],
+        "id_commercant": row[4],
         "id_facture": row[5],
       });
     }
