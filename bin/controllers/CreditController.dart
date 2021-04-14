@@ -10,7 +10,7 @@ class CreditController {
   Router get router {
     final router = Router();
 
-    //GET/v1/credit/:id
+    //GET/v1/credits/:id
     router.get('/<param>', (Request req, String param) async {
       var Test = await modelCredit();
       var results = await Test.getCredit(int.parse(param));
@@ -45,5 +45,9 @@ class CreditController {
       print(results);
       return Response.ok(results.toString(), headers: cors);
     }); */
+
+    router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));
+    return router;
+
   }
 }
