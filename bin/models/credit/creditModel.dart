@@ -10,7 +10,7 @@ class CreditModel {
   int id_employe;
   int id_entreprise;
   double montant;
-  var horodate_credit;
+  String horodate_credit;
 
 
   CreditModel(conn) {
@@ -45,7 +45,7 @@ class CreditModel {
   // POST/v1/credits
   insert(params) async {
     String sql =
-        """INSERT INTO ${this.table} (id_employe, id_entreprise, montant, horodate_credit) values (@id_employe, @id_entreprise, @montant, current_timestamp) RETURNING id_credit;
+        """INSERT INTO ${this.table} (id_employe, id_entreprise, montant, horodate_credit) values (@id_employe, @id_entreprise, @montant, to_char(current_timestamp, 'DD-Mon-YYYY:HH12:MI:SS')) RETURNING id_credit;
         UPDATE employe SET solde=solde + @montant WHERE id_employe=@id_employe;""";
     List<List<dynamic>> result =
     await conn.query(sql, substitutionValues: params);
