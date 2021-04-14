@@ -62,10 +62,11 @@ class CreditModel {
     String sql2 = "UPDATE employe SET solde=solde + @montant WHERE id_employe=@id_employe;";
     List<List<dynamic>> result =
     await conn.query(sql1, substitutionValues: params);
+    List<List<dynamic>> result2 =
     await conn.query(sql2, substitutionValues: params);
     this.id_credit = result[0][0];
     this.conn.close();
-    return this.id_employe;
+    return this.id_credit;
   }
 
 
