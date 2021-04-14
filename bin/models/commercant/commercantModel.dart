@@ -90,14 +90,14 @@ class CommercantModel {
     for (final row in results) {
       list.add({
         'id_commercant': row[0],
-        'nom': row[2],
-        'prenom': row[3],
-        'mail': row[4],
-        'password': row[5],
-        'adresse': row[6],
-        'codepostal': row[7],
-        'ville': row[8],
-        'nsiret': row[9]
+        'nom': row[1],
+        'prenom': row[2],
+        'mail': row[3],
+        'password': row[4],
+        'ville': row[5],
+        'codepostal': row[6],
+        'adresse': row[7],
+        'nsiret': row[8]
       });
     }
     ;

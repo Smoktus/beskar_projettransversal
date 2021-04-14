@@ -47,7 +47,7 @@ class EmployeurModel {
 
   insert(params) async {
     String sql =
-        "insert into ${this.table} (nom, prenom, mail, password, adresse, codepostal, ville, nsiret) values (@nom, @prenom, @mail, @password, @adresse, @codepostal, @ville, @nsiret)";
+        "insert into ${this.table} (nom, prenom, mail, password, ville, codepostal, adresse, nsiret) values (@nom, @prenom, @mail, @password, @ville, @codepostal, @adresse, @nsiret)";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
   }
@@ -61,14 +61,14 @@ class EmployeurModel {
     for (final row in results) {
       list.add({
         'id_entreprise': row[0],
-        'nom': row[2],
-        'prenom': row[3],
-        'mail': row[4],
-        'password': row[5],
-        'adresse': row[6],
-        'codepostal': row[7],
-        'ville': row[8],
-        'nsiret': row[9]
+        'nom': row[1],
+        'prenom': row[2],
+        'mail': row[3],
+        'password': row[4],
+        'ville': row[5],
+        'codepostal': row[6],
+        'adresse': row[7],
+        'nsiret': row[8]
       });
     }
     ;
@@ -85,14 +85,14 @@ class EmployeurModel {
     for (final row in results) {
       list.add({
         'id_entreprise': row[0],
-        'nom': row[2],
-        'prenom': row[3],
-        'mail': row[4],
-        'password': row[5],
-        'adresse': row[6],
-        'codepostal': row[7],
-        'ville': row[8],
-        'nsiret': row[9]
+        'nom': row[1],
+        'prenom': row[2],
+        'mail': row[3],
+        'password': row[4],
+        'ville': row[5],
+        'codepostal': row[6],
+        'adresse': row[7],
+        'nsiret': row[8]
       });
     }
     ;
@@ -107,8 +107,7 @@ class EmployeurModel {
       //print(entry.key);
       //print(entry.value);
       List<List<dynamic>> results = await this.conn.query(
-          "UPDATE ${this.table} SET ${entry.key}=@${entry
-              .key} WHERE id_entreprise=@id_entreprise",
+          "UPDATE ${this.table} SET ${entry.key}=@${entry.key} WHERE id_entreprise=@id_entreprise",
           substitutionValues: {
             "id_entreprise": id,
             "${entry.key}": entry.value
