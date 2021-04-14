@@ -99,10 +99,4 @@ class TransactionModel {
     List<Map<String, dynamic>> list = [];
   }
 
-  destroy(int id_transaction) async {
-    List<List<dynamic>> results = await this.conn.query(
-        "DELETE FROM ${this.table} WHERE id_transaction=@id_transaction",
-        substitutionValues: {"id_transaction": id_transaction});
-    this.conn.close();
-  }
 }

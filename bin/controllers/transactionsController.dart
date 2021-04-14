@@ -38,13 +38,6 @@ class TransactionController {
       return Response.ok(results.toString(), headers: cors);
     });
 
-    //DELETE /commercants/:id
-    router.delete('/<param>', (Request req, String param) async {
-      var Test = await modelTransaction();
-      void results = await Test.destroy(int.parse(param));
-      return Response.ok('Transaction supprimée', headers: cors);
-    });
-
     router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));
 
     return router;
