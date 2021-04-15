@@ -57,7 +57,7 @@ class CreditModel {
   insert(params) async {
     String sql1 =
     """INSERT INTO ${this.table} (id_employe, id_entreprise, montant, horodate_credit)
-       values (@id_employe, @id_entreprise, @montant, to_char(current_timestamp, 'DD-Mon-YYYY:HH12:MI:SS')) 
+       values (@id_employe, @id_entreprise, @montant, to_char(current_timestamp, 'YYYY-MM-DD HH12:MI:SS'))
        RETURNING id_credit;""";
     String sql2 = "UPDATE employe SET solde=solde + @montant WHERE id_employe=@id_employe;";
     List<List<dynamic>> result =

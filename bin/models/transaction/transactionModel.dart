@@ -35,7 +35,7 @@ class TransactionModel {
   insert(params) async {
     String sql =
         """INSERT INTO ${this.table} (date_transaction, prix_vente, id_commercant) 
-        values (to_char(current_timestamp, 'DD-Mon-YYYY:HH12:MI:SS'), @prix_vente, @id_commercant) RETURNING id_transaction;""";
+        values (to_char(current_timestamp, 'YYYY-MM-DD HH12:MI:SS'), @prix_vente, @id_commercant) RETURNING id_transaction;""";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
     this.id_transaction = result[0][0];
