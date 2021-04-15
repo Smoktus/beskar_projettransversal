@@ -38,6 +38,16 @@ class TransactionController {
       return Response.ok(results.toString(), headers: cors);
     });
 
+    //UPDATE /transaction/id_employe
+    router.put('/<param>', (Request req, String param) async {
+      final payload = await req.readAsString();
+      print(payload);
+      var Test = await modelTransaction();
+      var results = await Test.updateID(
+          int.parse(jsonDecode(payload)["id_employe"]), int.parse(param));
+      return Response.ok(results.toString(), headers: cors);
+    });
+
     router.all('/<ignored|.*>', (Request request) => Response.notFound('null'));
 
     return router;

@@ -35,7 +35,7 @@ class TransactionModel {
   insert(params) async {
     String sql =
         """INSERT INTO ${this.table} (date_transaction, prix_vente, id_commercant) 
-        values (to_char(current_timestamp, 'YYYY-MM-DD HH12:MI:SS'), @prix_vente, @id_commercant) RETURNING id_transaction;""";
+        values (to_char(current_timestamp, 'DD-MM-YYYY HH12:MI:SS'), @prix_vente, @id_commercant) RETURNING id_transaction;""";
     List<List<dynamic>> result =
         await conn.query(sql, substitutionValues: params);
     this.id_transaction = result[0][0];
@@ -52,8 +52,8 @@ class TransactionModel {
     for (final row in results) {
       list.add({
         "id_transaction": row[0],
-        "date_transaction": row[1],
-        "prix_vente": row[2],
+        "prix_vente": row[1],
+        "date_transaction": row[2],
         "id_employe": row[3],
         "id_commercant": row[4],
         "id_facture": row[5],
@@ -72,11 +72,11 @@ class TransactionModel {
 
     List<Map<String, dynamic>> list = [];
 
-  for (final row in results) {
+    for (final row in results) {
       list.add({
         "id_transaction": row[0],
-        "date_transaction": row[1],
-        "prix_vente": row[2],
+        "prix_vente": row[1],
+        "date_transaction": row[2],
         "id_employe": row[3],
         "id_commercant": row[4],
         "id_facture": row[5],
@@ -99,4 +99,20 @@ class TransactionModel {
     List<Map<String, dynamic>> list = [];
   }
 
+  updateID(int id_employe, int id_transaction) async {
+    List<List<dynamic>> results = await this.conn.query(
+        "UPDATE ${this.table} SET id_employe=@id_employe WHERE id_transaction=@id_transaction",
+        substitutionValues: {
+          "id_employe": id_employe,
+          "id_transaction": id_transaction
+        });
+    this.conn.close();
+  }
+
+  destroy(int id_transaction) async {
+    List<List<dynamic>> results = await this.conn.query(
+        "DELETE FROM ${this.table} WHERE id_transaction=@id_transaction",
+        substitutionValues: {"id_transaction": id_transaction});
+    this.conn.close();
+  }
 }
