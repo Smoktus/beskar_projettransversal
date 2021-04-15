@@ -25,11 +25,11 @@ content-type: application/json
 
 ###
 
-PUT https://beskarprojettransversal.herokuapp.com/solde/8 HTTP/1.1
+PUT https://beskarprojettransversal.herokuapp.com/solde/60 HTTP/1.1
 content-type: application/json
 
 {
-  "solde" : "18"
+  "solde" : "200"
 }
 
 ###
@@ -54,9 +54,10 @@ content-type: application/json
 
 ###
 
-PUT https://beskarprojettransversal.herokuapp.com/transactions/8 HTTP/1.1
+PUT https://beskarprojettransversal.herokuapp.com/transactions/16 HTTP/1.1
 content-type: application/json
 
 {
-  "id_employe": "1"
+  "id_employe": "60"
 }
+

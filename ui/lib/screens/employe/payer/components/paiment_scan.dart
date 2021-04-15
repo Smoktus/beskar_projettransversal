@@ -134,15 +134,28 @@ class _QRViewExampleState extends State<QRViewExample> {
                               final prefs =
                                   await SharedPreferences.getInstance();
                               final id_employe = prefs.getInt('id_employe');
+
+                              int id_transaction =
+                                  resultQrCode["id_transaction"];
+                              print(id_transaction);
                               String url =
-                                  'https://beskarprojettransversal.herokuapp.com/transactions/${resultQrCode["id_transaction"].toString()}';
+                                  'https://beskarprojettransversal.herokuapp.com/transactions/$id_transaction';
                               String url1 =
                                   'https://beskarprojettransversal.herokuapp.com/solde/$id_employe';
-                              /*final response = http.put(Uri.parse(url),
-                                  body: jsonDecode(result.code));*/
-                              double montant = resultQrCode["prix_vente"] * -1;
-                              final reponse1 = http.put(Uri.parse(url1),
-                                  body: {"solde": montant.toString()});
+                              print(url);
+                              final response = await http.put(Uri.parse(url),
+                                  body: jsonEncode(
+                                      {"id_employe": id_employe.toString()}));
+                              print(response.body);
+                              final response2 = await http.get(Uri.parse(url1));
+                              double montant = double.parse(response2.body) -
+                                  resultQrCode["prix_vente"];
+                              print(montant);
+                              final response1 = await http.put(Uri.parse(url1),
+                                  body: jsonEncode(
+                                      {"solde": montant.toString()}));
+
+                              print("${response.statusCode}");
                               Navigator.popAndPushNamed(
                                   context, EmployePayer.routeName);
                             },
