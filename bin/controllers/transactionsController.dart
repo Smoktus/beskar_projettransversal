@@ -43,8 +43,9 @@ class TransactionController {
       final payload = await req.readAsString();
       print(payload);
       var Test = await modelTransaction();
+      Map<String, dynamic> json = jsonDecode(payload);
       var results = await Test.updateID(
-          int.parse(jsonDecode(payload)["id_employe"]), int.parse(param));
+          int.parse(json["id_employe"]), int.parse(param));
       return Response.ok(results.toString(), headers: cors);
     });
 
