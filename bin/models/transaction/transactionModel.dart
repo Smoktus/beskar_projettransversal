@@ -52,8 +52,8 @@ class TransactionModel {
     for (final row in results) {
       list.add({
         "id_transaction": row[0],
-        "prix_vente": row[1],
-        "date_transaction": row[2],
+        "date_transaction": row[1],
+        "prix_vente": row[2],
         "id_employe": row[3],
         "id_commercant": row[4],
         "id_facture": row[5],
@@ -72,11 +72,11 @@ class TransactionModel {
 
     List<Map<String, dynamic>> list = [];
 
-    for (final row in results) {
+   for (final row in results) {
       list.add({
         "id_transaction": row[0],
-        "prix_vente": row[1],
-        "date_transaction": row[2],
+        "date_transaction": row[1],
+        "prix_vente": row[2],
         "id_employe": row[3],
         "id_commercant": row[4],
         "id_facture": row[5],
