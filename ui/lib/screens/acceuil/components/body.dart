@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ui/screens/acceuil/acceuil_screen.dart';
 import 'package:ui/screens/commercant/acceuil/commercant_acceuil.dart';
 import 'package:ui/screens/connection/connection_screen.dart';
+import 'package:ui/screens/employe/accueil/employe_accueil.dart';
 import 'package:ui/screens/inscription/inscription_screen.dart';
 import 'package:ui/screens/parametre/parametre_screen.dart';
 import 'package:ui/screens/test_fetch/test_fetch.dart';
@@ -40,7 +41,7 @@ class Body extends StatelessWidget {
               child: Text("Se connecter")),
           ElevatedButton(
               onPressed: () =>
-                  {Navigator.pushNamed(context, CommercantAcceuil.routeName)},
+                  {Navigator.pushNamed(context, EmployeAccueil.routeName)},
               child:
                   Text("Test Paramètre")) //permet de tester la page paramètre
         ],

@@ -51,3 +51,12 @@ content-type: application/json
   "prenom": "Kylian",
   "mail" : "kylian.mbappe@beskar.com"
 }
+
+###
+
+PUT https://beskarprojettransversal.herokuapp.com/transactions/8 HTTP/1.1
+content-type: application/json
+
+{
+  "id_employe": "1"
+}

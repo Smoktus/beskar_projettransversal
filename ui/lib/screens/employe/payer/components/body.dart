@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui/constants.dart';
+import 'package:ui/screens/employe/payer/components/paiment_scan.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -69,7 +70,15 @@ class Body extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("assets/images/nfc.png", scale: 2.5),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(kButtonColor)),
+                      onPressed: () {
+                        Navigator.pushNamed(context, QRViewExample.routeName);
+                      },
+                      child: Text("Scanner"))
+                  //Image.asset("assets/images/nfc.png", scale: 2.5),
                 ],
                 /*children: <Widget>[
                 IconButton(

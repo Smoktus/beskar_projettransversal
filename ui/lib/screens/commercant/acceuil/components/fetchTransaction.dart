@@ -27,6 +27,7 @@ Future<dynamic> fetchTransactionAcceuil() async {
   }
   double sum = 0;
   for (var l in list) {
+    print(l.date_transaction);
     sum += l.prix_vente;
   }
   print(list);

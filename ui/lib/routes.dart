@@ -8,6 +8,7 @@ import 'package:ui/screens/employe/accueil/employe_accueil.dart';
 import 'package:ui/screens/employe/commerces/employe_commerces.dart';
 import 'package:ui/screens/employe/historique/employe_historique.dart';
 import 'package:ui/screens/employe/map/employe_map.dart';
+import 'package:ui/screens/employe/payer/components/paiment_scan.dart';
 import 'package:ui/screens/employe/payer/employe_payer.dart';
 import 'package:ui/screens/employeur/accueil/employeur_liste_employes.dart';
 import 'package:ui/screens/inscription/inscription_screen.dart';
@@ -30,5 +31,6 @@ final Map<String, WidgetBuilder> routes = {
   EmployeurAccueil.routeName: (context) => EmployeurAccueil(),
   CommercantAcceuil.routeName: (context) => CommercantAcceuil(),
   CommercantEncaissement.routeName: (context) => CommercantEncaissement(),
-  CommercantHistorique.routeName: (context) => CommercantHistorique()
+  CommercantHistorique.routeName: (context) => CommercantHistorique(),
+  QRViewExample.routeName: (context) => QRViewExample()
 };
