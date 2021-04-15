@@ -11,7 +11,7 @@ class FactureModel {
   int prix_vente;
   int id_banque;
   int id_commercant;
-  int id_entreprise;
+  //int id_entreprise;
 
   FactureModel(conn) {
     this.conn = conn;
@@ -34,7 +34,7 @@ class FactureModel {
         "prix_vente": row[3],
         "id_commercant": row[4],
         "id_banque": row[5],
-        "id_entreprise": row[6],
+        //"id_entreprise": row[6],
       });
     }
     ;
@@ -56,7 +56,7 @@ class FactureModel {
         "prix_vente": row[3],
         "id_commercant": row[4],
         "id_banque": row[5],
-        "id_entreprise": row[6],
+        //"id_entreprise": row[6],
       });
     }
     ;
