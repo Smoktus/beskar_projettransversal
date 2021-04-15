@@ -20,7 +20,7 @@ Future<Employe> fetchData() async {
     } else {
       throw Exception('Failed to post data');
     }
-  } else if (role == 'commercant') {
+  } else if (role == 'commercants') {
     final int id_commercant = prefs.getInt('id_commercant');
     String url1 =
         'https://beskarprojettransversal.herokuapp.com/$role/$id_commercant';
@@ -31,7 +31,7 @@ Future<Employe> fetchData() async {
     } else {
       throw Exception('Failed to post data');
     }
-  } else if (role == 'employeur') {
+  } else if (role == 'employeurs') {
     final int id_entreprise = prefs.getInt('id_commercant');
     String url1 =
         'https://beskarprojettransversal.herokuapp.com/$role/$id_entreprise';

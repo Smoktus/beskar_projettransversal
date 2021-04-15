@@ -4,7 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ui/modelsData/commercant.dart';
 import 'package:ui/modelsData/employe.dart';
+import 'package:ui/modelsData/employeur.dart';
+import 'package:ui/screens/commercant/acceuil/commercant_acceuil.dart';
 import 'package:ui/screens/connection/components/connection_form.dart';
 import 'package:http/http.dart' as http;
 import 'package:ui/screens/employe/accueil/employe_accueil.dart';
@@ -86,14 +89,33 @@ class Body extends StatelessWidget {
                           Navigator.popAndPushNamed(
                               context, EmployeAccueil.routeName);
                         }
-                      } else if (role == 'employeur') {
+                      } else if (role == 'employeurs') {
                         final int id_employeur = prefs.getInt('id_employeur');
-                      } else if (role == 'commercant') {
+                        String url =
+                            'https://beskarprojettransversal.herokuapp.com/$role/$id_employeur';
+                        final response = await http.get(Uri.parse(url));
+                        Employeur r =
+                            Employeur.fromJson(jsonDecode(response.body));
+                        if (r.mail == mail && r.password == password) {
+                          print("peut proceder à la suite");
+                          Navigator.popAndPushNamed(
+                              context, EmployeurAccueil.routeName);
+                        }
+                      } else if (role == 'commercants') {
                         final int id_commercant = prefs.getInt('id_commercant');
+                        String url =
+                            'https://beskarprojettransversal.herokuapp.com/$role/$id_commercant';
+                        final response = await http.get(Uri.parse(url));
+                        Commercant c =
+                            Commercant.fromJson(jsonDecode(response.body));
+                        if (c.mail == mail && c.password == password) {
+                          print("peut proceder à la suite");
+                          Navigator.popAndPushNamed(
+                              context, CommercantAcceuil.routeName);
+                        }
                       }
-                      //get password and mail
-                      //
                       print('pressed $isRemembered');
+                      //if (isRemembered) {}
                     }
                   },
                   child: Text('Submit')),

@@ -72,255 +72,257 @@ class _InscriptionFormState extends State<InscriptionForm> {
     final width = mediaQueryData.size.width;
     final Map<String, dynamic> mapForm = new Map<String, dynamic>();
     String role = '';
-    return Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text("Formulaire d'inscription",
-                style: TextStyle(
-                  fontSize: 24,
-                )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text("Rôle",
-                    style: TextStyle(
-                      fontSize: 18,
-                    )),
-                Consumer<DropDownListProvider>(
-                  builder: (_, provider, __) {
-                    return DropdownButton<String>(
-                      value: provider.selected,
-                      onChanged: (String newValue) {
-                        provider.setSelectedItem(newValue);
-                        //mapForm["role"] = newValue;
-                        role = newValue;
+    return SingleChildScrollView(
+      child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text("Formulaire d'inscription",
+                  style: TextStyle(
+                    fontSize: 24,
+                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text("Rôle",
+                      style: TextStyle(
+                        fontSize: 18,
+                      )),
+                  Consumer<DropDownListProvider>(
+                    builder: (_, provider, __) {
+                      return DropdownButton<String>(
+                        value: provider.selected,
+                        onChanged: (String newValue) {
+                          provider.setSelectedItem(newValue);
+                          //mapForm["role"] = newValue;
+                          role = newValue;
+                        },
+                        items: provider.items
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: width / 2,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(8),
+                        icon: Icon(Icons.person),
+                        labelText: 'Nom',
+                      ),
+                      onSaved: (String value) {
+                        mapForm["nom"] = value;
                       },
-                      items: provider.items
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    );
-                  },
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                  width: width / 2,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      icon: Icon(Icons.person),
-                      labelText: 'Nom',
+                      validator: (String value) {
+                        return (value.isEmpty)
+                            ? 'You need to fill this field'
+                            : null;
+                      },
                     ),
-                    onSaved: (String value) {
-                      mapForm["nom"] = value;
-                    },
-                    validator: (String value) {
-                      return (value.isEmpty)
-                          ? 'You need to fill this field'
-                          : null;
-                    },
                   ),
-                ),
-                Container(
-                  width: width / 2,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      icon: Icon(Icons.person),
-                      labelText: 'Prénom',
+                  Container(
+                    width: width / 2,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(8),
+                        icon: Icon(Icons.person),
+                        labelText: 'Prénom',
+                      ),
+                      onSaved: (String value) {
+                        mapForm["prenom"] = value;
+                      },
+                      validator: (String value) {
+                        return (value.isEmpty)
+                            ? 'You need to fill this field'
+                            : null;
+                      },
                     ),
-                    onSaved: (String value) {
-                      mapForm["prenom"] = value;
-                    },
-                    validator: (String value) {
-                      return (value.isEmpty)
-                          ? 'You need to fill this field'
-                          : null;
-                    },
                   ),
-                ),
-              ],
-            ),
-            SizedBox(),
-            Row(
-              children: [
-                Container(
-                  width: width / 2,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      icon: Icon(Icons.contact_mail),
-                      labelText: 'Mail',
+                ],
+              ),
+              SizedBox(),
+              Row(
+                children: [
+                  Container(
+                    width: width / 2,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(8),
+                        icon: Icon(Icons.contact_mail),
+                        labelText: 'Mail',
+                      ),
+                      onSaved: (String value) {
+                        mapForm["mail"] = value;
+                      },
+                      validator: (String value) {
+                        return (value != null && !value.contains('@'))
+                            ? 'Your email must contains @ '
+                            : null;
+                      },
                     ),
-                    onSaved: (String value) {
-                      mapForm["mail"] = value;
-                    },
-                    validator: (String value) {
-                      return (value != null && !value.contains('@'))
-                          ? 'Your email must contains @ '
-                          : null;
-                    },
                   ),
-                ),
-                Container(
-                  width: width / 2,
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      icon: Icon(Icons.lock),
-                      labelText: 'Password',
+                  Container(
+                    width: width / 2,
+                    child: TextFormField(
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(8),
+                        icon: Icon(Icons.lock),
+                        labelText: 'Password',
+                      ),
+                      onSaved: (String value) {
+                        mapForm["password"] = value;
+                      },
+                      validator: (String value) {
+                        return (value.isEmpty || value.length < 8)
+                            ? 'Your password is too short 8 characters minimun'
+                            : null;
+                      },
                     ),
-                    onSaved: (String value) {
-                      mapForm["password"] = value;
-                    },
-                    validator: (String value) {
-                      return (value.isEmpty || value.length < 8)
-                          ? 'Your password is too short 8 characters minimun'
-                          : null;
-                    },
                   ),
-                ),
-              ],
-            ),
-            SizedBox(),
-            Row(
-              children: [
-                Container(
-                  width: width / 2,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      icon: Icon(Icons.room),
-                      labelText: 'Adresse',
+                ],
+              ),
+              SizedBox(),
+              Row(
+                children: [
+                  Container(
+                    width: width / 2,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(8),
+                        icon: Icon(Icons.room),
+                        labelText: 'Adresse',
+                      ),
+                      onSaved: (String value) {
+                        mapForm["adresse"] = value;
+                      },
+                      validator: (String value) {
+                        return (value.isEmpty)
+                            ? 'You need to fill this field'
+                            : null;
+                      },
                     ),
-                    onSaved: (String value) {
-                      mapForm["adresse"] = value;
-                    },
-                    validator: (String value) {
-                      return (value.isEmpty)
-                          ? 'You need to fill this field'
-                          : null;
-                    },
                   ),
-                ),
-                Container(
-                  width: width / 2,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      icon: Icon(Icons.local_post_office),
-                      labelText: 'Code Postale',
+                  Container(
+                    width: width / 2,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(8),
+                        icon: Icon(Icons.local_post_office),
+                        labelText: 'Code Postale',
+                      ),
+                      onSaved: (String value) {
+                        mapForm["codepostal"] = value;
+                      },
+                      validator: (String value) {
+                        return (value.isEmpty)
+                            ? 'You need to fill this field'
+                            : null;
+                      },
                     ),
-                    onSaved: (String value) {
-                      mapForm["codepostal"] = value;
-                    },
-                    validator: (String value) {
-                      return (value.isEmpty)
-                          ? 'You need to fill this field'
-                          : null;
-                    },
                   ),
-                ),
-              ],
-            ),
-            SizedBox(),
-            Row(
-              children: [
-                Container(
-                  width: width / 2,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      icon: Icon(Icons.home),
-                      labelText: 'Ville',
+                ],
+              ),
+              SizedBox(),
+              Row(
+                children: [
+                  Container(
+                    width: width / 2,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(8),
+                        icon: Icon(Icons.home),
+                        labelText: 'Ville',
+                      ),
+                      onSaved: (String value) {
+                        mapForm["ville"] = value;
+                      },
+                      validator: (String value) {
+                        return (value.isEmpty)
+                            ? 'You need to fill this field.'
+                            : null;
+                      },
                     ),
-                    onSaved: (String value) {
-                      mapForm["ville"] = value;
-                    },
-                    validator: (String value) {
-                      return (value.isEmpty)
-                          ? 'You need to fill this field.'
-                          : null;
-                    },
                   ),
-                ),
-                Container(
-                  width: width / 2,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      icon: Icon(Icons.business),
-                      labelText: 'Numéro de Siret',
+                  Container(
+                    width: width / 2,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(8),
+                        icon: Icon(Icons.business),
+                        labelText: 'Numéro de Siret',
+                      ),
+                      onSaved: (String value) {
+                        mapForm["nsiret"] = value;
+                      },
+                      validator: (String value) {
+                        return (value.isEmpty)
+                            ? 'You need to fill this field.'
+                            : null;
+                      },
                     ),
-                    onSaved: (String value) {
-                      mapForm["nsiret"] = value;
-                    },
-                    validator: (String value) {
-                      return (value.isEmpty)
-                          ? 'You need to fill this field.'
-                          : null;
-                    },
                   ),
-                ),
-              ],
-            ),
-            ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(kButtonColor)),
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
-                    print(mapForm);
-                    if (role == 'Employé') {
-                      String roles = 'employes';
-                      String url1 =
-                          'https://beskarprojettransversal.herokuapp.com/$roles/';
-                      final response = await http.post(Uri.parse(url1),
-                          body: jsonEncode(mapForm));
-                      print(response.statusCode);
-                      int id_employe = int.parse(response.body);
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.setString('role', roles);
-                      prefs.setInt('id_employe', id_employe);
-                    } else if (role == 'Employeur') {
-                      String roles = 'employeur';
-                      String url1 =
-                          'https://beskarprojettransversal.herokuapp.com/$roles/';
-                      final response = await http.post(Uri.parse(url1),
-                          body: jsonEncode(mapForm));
-                      print(response.statusCode);
-                      print(response.body); //récupération id
-                      int id_entreprise = int.parse(response.body);
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.setString('role', roles);
-                      prefs.setInt('id_entreprise', id_entreprise); //à tester
-                    } else if (role == 'Commerçant') {
-                      String roles = 'commercant';
-                      String url1 =
-                          'https://beskarprojettransversal.herokuapp.com/$roles/';
-                      final response = await http.post(Uri.parse(url1),
-                          body: jsonEncode(mapForm));
-                      print(response.statusCode);
-                      int id_commercant = int.parse(response.body);
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.setString('role', roles);
-                      prefs.setInt('id_commercant', id_commercant);
+                ],
+              ),
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(kButtonColor)),
+                  onPressed: () async {
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      print(mapForm);
+                      if (role == 'Employé') {
+                        String roles = 'employes';
+                        String url1 =
+                            'https://beskarprojettransversal.herokuapp.com/$roles/';
+                        final response = await http.post(Uri.parse(url1),
+                            body: jsonEncode(mapForm));
+                        print(response.statusCode);
+                        int id_employe = int.parse(response.body);
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setString('role', roles);
+                        prefs.setInt('id_employe', id_employe);
+                      } else if (role == 'Employeur') {
+                        String roles = 'employeurs';
+                        String url1 =
+                            'https://beskarprojettransversal.herokuapp.com/$roles/';
+                        final response = await http.post(Uri.parse(url1),
+                            body: jsonEncode(mapForm));
+                        print(response.statusCode);
+                        print(response.body); //récupération id
+                        int id_entreprise = int.parse(response.body);
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setString('role', roles);
+                        prefs.setInt('id_entreprise', id_entreprise); //à tester
+                      } else if (role == 'Commerçant') {
+                        String roles = 'commercants';
+                        String url1 =
+                            'https://beskarprojettransversal.herokuapp.com/$roles/';
+                        final response = await http.post(Uri.parse(url1),
+                            body: jsonEncode(mapForm));
+                        print(response.statusCode);
+                        int id_commercant = int.parse(response.body);
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setString('role', roles);
+                        prefs.setInt('id_commercant', id_commercant);
+                      }
                     }
-                  }
-                },
-                child: Text("Envoyer"))
-          ],
-        ));
+                  },
+                  child: Text("Envoyer"))
+            ],
+          )),
+    );
   }
 }
 

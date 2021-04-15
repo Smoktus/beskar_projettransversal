@@ -17,12 +17,12 @@ class Body extends StatelessWidget {
         SizedBox(
           height: 100,
         ),
-        ElevatedButton(
+        /*ElevatedButton(
             style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all<Color>(kButtonColor)),
             onPressed: () {},
-            child: Text("Génerer une facture"))
+            child: Text("Génerer une facture"))*/
       ],
     );
   }

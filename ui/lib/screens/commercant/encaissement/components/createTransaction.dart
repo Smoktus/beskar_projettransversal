@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui/constants.dart';
 import 'package:ui/modelsData/transaction.dart';
 import 'package:http/http.dart' as http;
@@ -65,27 +66,26 @@ class _EncaissementField extends State<EncaissementField> {
             onPressed: () async {
               double montant = double.parse(myController.text);
               print(montant);
+              final prefs = await SharedPreferences.getInstance();
+              final int id_commercant = prefs.getInt('id_commercant');
               String url =
-                  'https://beskarprojettransversal.herokuapp.com/transaction/';
-              /*Transaction(
-                  date_transaction: DateTime.now(), prix_vente: montant);*/
+                  'https://beskarprojettransversal.herokuapp.com/transactions/';
               Map<String, dynamic> body = {
-                "date_transaction": "${DateTime.now()}",
-                "prix_vente": "$montant"
+                "prix_vente": "$montant",
+                "id_commercant": id_commercant
               };
               final response =
                   await http.post(Uri.parse(url), body: jsonEncode(body));
               print(response.statusCode);
               _QRCodeData = {
-                "date_transaction": DateTime.now().toString(),
                 "prix_vente": montant,
-                "id_transaction": 3 //int.parse(response.body)
+                "id_transaction": int.parse(response.body)
               };
               //if (response.statusCode == 404) {
               setState(() {
                 _isPressed = true;
               });
-              _timer = Timer(const Duration(seconds: 10), () {
+              /*_timer = Timer(const Duration(seconds: 60), () {
                 setState(() {
                   _isPressed = false;
                   myController.clear();
@@ -98,7 +98,7 @@ class _EncaissementField extends State<EncaissementField> {
                         content: Text("Transaction expirée"),
                       );
                     });
-              });
+              });*/
             },
             //},
             child: Text("Enregistrer une transaction"))

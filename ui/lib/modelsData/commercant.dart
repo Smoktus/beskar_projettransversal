@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class Employeur {
-  final int id_entreprise;
+class Commercant {
+  final int id_commercant;
   final String nom;
   final String prenom;
   final String mail;
@@ -10,8 +10,9 @@ class Employeur {
   final String codepostal;
   final String ville;
   final String nsiret;
-  Employeur(
-      {this.id_entreprise,
+
+  Commercant(
+      {this.id_commercant,
       this.nom,
       this.prenom,
       this.mail,
@@ -25,9 +26,9 @@ class Employeur {
     return jsonDecode(data);
   }
 
-  factory Employeur.fromJson(Map<String, dynamic> json) {
-    return Employeur(
-        id_entreprise: json["id_employe"],
+  factory Commercant.fromJson(Map<String, dynamic> json) {
+    return Commercant(
+        id_commercant: json["id_employe"],
         nom: json["nom"],
         prenom: json["prenom"],
         mail: json["mail"],
