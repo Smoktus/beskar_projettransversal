@@ -37,12 +37,19 @@ class MyBottomNavBar extends StatelessWidget {
                 press: () {
                   navItems.changeNavIndex(index: index);
                   if (navItems.items[index].destinationChecker())
-                    Navigator.push(
+                    Navigator.pop(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => navItems.items[index].destination,
+                        builder: (context) =>
+                            navItems.items[index - 1].destination,
                       ),
                     );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => navItems.items[index].destination,
+                    ),
+                  );
                 },
               ),
             ),

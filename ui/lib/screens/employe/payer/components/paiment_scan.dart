@@ -59,6 +59,10 @@ class _QRViewExampleState extends State<QRViewExample> {
                       Container(
                         margin: EdgeInsets.all(8),
                         child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        kButtonColor)),
                             onPressed: () async {
                               await controller?.toggleFlash();
                               setState(() {});
@@ -73,6 +77,10 @@ class _QRViewExampleState extends State<QRViewExample> {
                       Container(
                         margin: EdgeInsets.all(8),
                         child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        kButtonColor)),
                             onPressed: () async {
                               await controller?.flipCamera();
                               setState(() {});

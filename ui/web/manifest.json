@@ -1,6 +1,6 @@
 {
-    "name": "ui",
-    "short_name": "ui",
+    "name": "beskar",
+    "short_name": "beskar",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

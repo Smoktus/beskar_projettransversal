@@ -7,31 +7,33 @@ import 'package:http/http.dart' as http;
 import '../../../../constants.dart';
 import '../../../../modelsData/employe.dart';
 
+Future<Employe> fetchEmploye() async {
+  final prefs = await SharedPreferences.getInstance();
+  final String role = prefs.getString('role');
+  final int id_employe = prefs.getInt('id_employe');
+  String url =
+      'https://beskarprojettransversal.herokuapp.com/$role/$id_employe';
+  final response = await http.get(Uri.parse(url));
+  Employe e = Employe.fromJson(jsonDecode(response.body));
+  return e;
+}
+
 class EmployeSolde extends StatefulWidget {
   _EmployeSolde createState() => _EmployeSolde();
 }
 
 class _EmployeSolde extends State<EmployeSolde> {
-  Employe _employe;
-
-  Future<Employe> fetchEmploye() async {
-    final prefs = await SharedPreferences.getInstance();
-    final String role = prefs.getString('role');
-    final int id_employe = prefs.getInt('id_employe');
-    String url = 'https://beskarprojettransversal.herokuapp.com/$role/$id_employe';
-    final response = await http.get(Uri.parse(url));
-    Employe e = Employe.fromJson(jsonDecode(response.body));
-    return e;
-  }
+  Future<Employe> _employe;
 
   @override
   void initState() {
     super.initState();
-    fetchEmploye().then((employe) {
+    _employe = fetchEmploye();
+    /*fetchEmploye().then((employe) {
       setState(() {
-        _employe = employe;
+       
       });
-    });
+    });*/
   }
 
   @override
@@ -56,22 +58,56 @@ class _EmployeSolde extends State<EmployeSolde> {
                     height: 5,
                   ),
                 ),
-                Text(
-                  _employe.solde.toStringAsFixed(2) + " €",
-                  style: TextStyle(
-                    fontFamily: "Bookman Old Style",
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: kTextColorBright,
-                    height: 1.2,
-                  ),
+                Center(
+                  child: (_employe == null)
+                      ? CircularProgressIndicator()
+                      : FutureBuilder<Employe>(
+                          future: _employe,
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return Text("processing");
+                            }
+                            return Text(
+                              snapshot.data.solde.toStringAsFixed(2) + " €",
+                              style: TextStyle(
+                                fontFamily: "Bookman Old Style",
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                                color: kTextColorBright,
+                                height: 1.2,
+                              ),
+                            );
+                          }),
                 ),
               ],
             ),
           ],
         ),
+        SizedBox(
+          height: 180,
+        ),
+        Center(
+          child: (_employe == null)
+              ? CircularProgressIndicator()
+              : FutureBuilder<Employe>(
+                  future: _employe,
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Text("processing");
+                    }
+                    return Text(
+                      "Bonjour ${snapshot.data.prenom} !",
+                      style: TextStyle(
+                        fontFamily: "Bookman Old Style",
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: kTextColorBright,
+                        height: 1.2,
+                      ),
+                    );
+                  }),
+        ),
       ],
     );
   }
 }
-

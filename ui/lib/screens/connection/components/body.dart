@@ -7,9 +7,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui/modelsData/commercant.dart';
 import 'package:ui/modelsData/employe.dart';
 import 'package:ui/modelsData/employeur.dart';
+import 'package:ui/screens/acceuil/acceuil_screen.dart';
 import 'package:ui/screens/commercant/acceuil/commercant_acceuil.dart';
 import 'package:ui/screens/connection/components/connection_form.dart';
 import 'package:http/http.dart' as http;
+import 'package:ui/screens/connection/connection_screen.dart';
 import 'package:ui/screens/employe/accueil/employe_accueil.dart';
 import 'package:ui/screens/employeur/accueil/employeur_liste_employes.dart';
 
@@ -86,7 +88,12 @@ class Body extends StatelessWidget {
                         Employe e = Employe.fromJson(jsonDecode(response.body));
                         if (e.mail == mail && e.password == password) {
                           print("peut proceder à la suite");
-                          Navigator.popAndPushNamed(
+                          /*Navigator.pop(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AcceuilScreen()));*/
+
+                          Navigator.pushReplacementNamed(
                               context, EmployeAccueil.routeName);
                         }
                       } else if (role == 'employeurs') {
@@ -99,6 +106,10 @@ class Body extends StatelessWidget {
                         if (r.mail == mail && r.password == password) {
                           print("peut proceder à la suite");
                           Navigator.popAndPushNamed(
+                              context, AcceuilScreen.routeName);
+                          Navigator.popAndPushNamed(
+                              context, ConnectionScreen.routeName);
+                          Navigator.popAndPushNamed(
                               context, EmployeurAccueil.routeName);
                         }
                       } else if (role == 'commercants') {
@@ -110,6 +121,10 @@ class Body extends StatelessWidget {
                             Commercant.fromJson(jsonDecode(response.body));
                         if (c.mail == mail && c.password == password) {
                           print("peut proceder à la suite");
+                          Navigator.popAndPushNamed(
+                              context, AcceuilScreen.routeName);
+                          Navigator.popAndPushNamed(
+                              context, ConnectionScreen.routeName);
                           Navigator.popAndPushNamed(
                               context, CommercantAcceuil.routeName);
                         }

@@ -39,11 +39,11 @@ class Body extends StatelessWidget {
               onPressed: () =>
                   {Navigator.pushNamed(context, ConnectionScreen.routeName)},
               child: Text("Se connecter")),
-          ElevatedButton(
+          /*ElevatedButton(
               onPressed: () =>
                   {Navigator.pushNamed(context, EmployeAccueil.routeName)},
               child:
-                  Text("Test Paramètre")) //permet de tester la page paramètre
+                  Text("Test Paramètre")) */ //permet de tester la page paramètre
         ],
       ),
     ));
