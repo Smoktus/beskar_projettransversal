@@ -29,8 +29,8 @@ We are using this template :arrow_down:
 
 ## How to use
 
-    `Web version` : https://smoktus.github.io/beskarweb/
+    `Web version : https://smoktus.github.io/beskarweb/`
         Deployement of the web version of the flutter project. Many bugs and very hard to use the app.
 
-    `Mobile version`:
+    `Mobile version :`
         Clone the project and build it to your device by launching the main.dart in the ui folder.
