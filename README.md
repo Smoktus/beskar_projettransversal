@@ -5,7 +5,7 @@ The goal was to make individualized interface for each user.
 
 # Shelf server written in Dart deploy in Heroku as a Rest Api
 
-`We are using this template :arrow_down:`
+We are using this template :arrow_down:
 
 # Shelf Web Framework Template
 
